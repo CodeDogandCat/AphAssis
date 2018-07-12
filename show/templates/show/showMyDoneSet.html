@@ -25,63 +25,63 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:30%;top:15%;width:75%;height:75%">
+                <fieldset style="position:absolute;left:28%;top:20%;width:75%;height:75%">
                     <legend>已完成训练</legend>
                     <form action="">
                         <table border="1" width="80%">
-                            <tr>
+                            <tr height="75px" align="center" style="font-size:20px">
                                 <td width="10%">id</td>
                                 <td width="10%">套题</td>
                                 <td width="30%">描述</td>
                                 <td width="10%">布置时间</td>
                                 <td width="10%">完成时间</td>
-                                <td width="10%">所用时间</td>
-                                <td width="20%">操作</td>
+                                <td width="15%">所用时间</td>
+                                <td width="15%">操作</td>
                             </tr>
-                            <tr>
+                            <tr align="center" id="tr1">
                                 <td id="id1" width="10%">0</td>
                                 <td id="tdset1" width="10%">Loading..</td>
                                 <td id="tdsetdes1" width="30%"> Loading..</td>
                                 <td id="tdarrtime1" width="10%">Loading..</td>
                                 <td id="tdfintime1" width="10%">Loading..</td>
-                                <td id="tdusedtime1" width="10%">Loading..</td>
-                                <td id="tdreview1" width="20%"><a id="op1" href="#">复习</a></td>
+                                <td id="tdusedtime1" width="15%">Loading..</td>
+                                <td id="tdreview1" width="15%"><a id="op1" href="#">复习</a></td>
                             </tr>
-                            <tr>
+                            <tr align="center" id="tr2">
                                 <td id="id2" width="10%">0</td>
                                 <td id="tdset2" width="10%">Loading..</td>
                                 <td id="tdsetdes2" width="30%"> Loading..</td>
                                 <td id="tdarrtime2" width="10%">Loading..</td>
                                 <td id="tdfintime2" width="10%">Loading..</td>
-                                <td id="tdusedtime2" width="10%">Loading..</td>
-                                <td id="tdreview2" width="20%"><a id="op2" href="#">复习</a></td>
+                                <td id="tdusedtime2" width="15%">Loading..</td>
+                                <td id="tdreview2" width="15%"><a id="op2" href="#">复习</a></td>
                             </tr>
-                            <tr>
+                            <tr align="center" id="tr3">
                                 <td id="id3" width="10%">0</td>
                                 <td id="tdset3" width="10%">Loading..</td>
                                 <td id="tdsetdes3" width="30%"> Loading..</td>
                                 <td id="tdarrtime3" width="10%">Loading..</td>
                                 <td id="tdfintime3" width="10%">Loading..</td>
-                                <td id="tdusedtime3" width="10%">Loading..</td>
-                                <td id="tdreview3" width="20%"><a id="op3" href="#">复习</a></td>
+                                <td id="tdusedtime3" width="15%">Loading..</td>
+                                <td id="tdreview3" width="15%"><a id="op3" href="#">复习</a></td>
                             </tr>
-                            <tr>
+                            <tr align="center" id="tr4">
                                 <td id="id4" width="10%">0</td>
                                 <td id="tdset4" width="10%">Loading..</td>
                                 <td id="tdsetdes4" width="30%"> Loading..</td>
                                 <td id="tdarrtime4" width="10%">Loading..</td>
                                 <td id="tdfintime4" width="10%">Loading..</td>
-                                <td id="tdusedtime4" width="10%">Loading..</td>
-                                <td id="tdreview4" width="20%"><a id="op4" href="#">复习</a></td>
+                                <td id="tdusedtime4" width="15%">Loading..</td>
+                                <td id="tdreview4" width="15%"><a id="op4" href="#">复习</a></td>
                             </tr>
-                            <tr>
+                            <tr align="center" id="tr5">
                                 <td id="id5" width="10%">0</td>
                                 <td id="tdset5" width="10%">Loading..</td>
                                 <td id="tdsetdes5" width="30%"> Loading..</td>
                                 <td id="tdarrtime5" width="10%">Loading..</td>
                                 <td id="tdfintime5" width="10%">Loading..</td>
-                                <td id="tdusedtime5" width="10%">Loading..</td>
-                                <td id="tdreview5" width="20%"><a id="op5" href="#">复习</a></td>
+                                <td id="tdusedtime5" width="15%">Loading..</td>
+                                <td id="tdreview5" width="15%"><a id="op5" href="#">复习</a></td>
                             </tr>
 
                         </table>
@@ -186,6 +186,7 @@
             var tdfintime = document.getElementById('tdfintime' + (i + 1));
             var tdusedtime = document.getElementById('tdusedtime' + (i + 1));
             var op = document.getElementById('op' + (i + 1));
+            var TR = document.getElementById('tr'+(i+1));
 
               if ((final && i >= reduce && ques_2_disp != 5) || all_length == 0) {
                 id.innerText = "";
@@ -197,6 +198,8 @@
                 op.innerText = "";
             }
             else {
+                TR.height = 50;
+                TR.style = "font-size:16px";
                 id.innerText = all_sets["id" + (startNum + i)];
                 tdset.innerText = all_sets["arr_set" + (startNum + i)];
                 tdsetdes.innerText = all_sets["setdes" + (startNum + i)];

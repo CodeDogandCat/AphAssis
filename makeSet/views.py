@@ -10,6 +10,7 @@ from django.http import HttpResponse, JsonResponse
 from makeSet.models import QuestionSet
 # Create your views here.
 
+#制作套题
 def makeSet(request):
     username = request.session['username']
     classid = request.session['classid']

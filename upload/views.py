@@ -45,10 +45,11 @@ def upload(request):
     return render(request, 'upload/uploadEx.html', {'username': username, 'classid': classid})
 
 
+#引导语的增删改查
 @csrf_exempt
 def guide_upload(request):
     if request.method == 'POST':
-        right = request.POST.get('right', None)
+        right = request.POST.get('right', None)    #从前端的输入框里获取输入
         wrong = request.POST.get('wrong', None)
         guidance = request.POST.get('guide', None)
 

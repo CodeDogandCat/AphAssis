@@ -17,10 +17,18 @@ Including another URLconf
 from django.views.generic import TemplateView, RedirectView
 from django.conf.urls import url
 from django.contrib import admin
+
+from show import Work as work_views
+from show import expre as expr_views
+from show import doExer as Do_Views
+from show import views as show_views
+from show import sets as sets_views
+from show import gen as gens_views
+
 from makeSet import views as Set_views
 from upload import views as upload_views
-from show import views as show_views
 from login import views as login_views
+
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -36,34 +44,40 @@ urlpatterns = [
                   # 页面显示
                   url(r'^index/', show_views.index),
                   url(r'^show/', show_views.showAllEx),
-                  url(r'^viewGuideline/', upload_views.viewGuideline, name="viewGuideline"),
-                  url(r'^setDisplay/', show_views.setDisplay, name="setDisplay"),
-                  url(r'^allGen/', show_views.allGen, name="allGen"),
-                  url(r'^gen_detail/', show_views.gen_detail, name="gen_detail"),
-                  url(r'^set_detail/', show_views.set_detail, name="set_detail"),
-                  url(r'^view_allMyDoneSet/', show_views.view_allMyDoneSet, name="view_allMyDoneSet"),
-                  url(r'^view_allMyToDoSet/', show_views.view_allMyToDoSet, name="view_allMyToDoSet"),
-                  url(r'^get_specificGuide/', upload_views.get_specificGuide, name="get_specificGuide"),
-                  url(r'^get_allMyToDoSet/', show_views.get_allMyToDoSet, name="get_allMyToDoSet"),
-                  url(r'^get_nextToDo/', show_views.get_nextToDo, name="get_nextToDo"),
-                  url(r'^get_all/', Set_views.get_all_set, name="get_all"),
-                  url(r'^get_allGen/', show_views.get_allGen, name="get_allGen"),
-                  url(r'^get_allSets/', show_views.get_allSets, name="get_allSets"),
-                  url(r'^get_allMyDoneSet/', show_views.get_allMyDoneSet, name="get_allMyDoneSet"),
-                  url(r'^error_answer/', show_views.error_answer, name="error_answer"),
+                  url(r'^submit_arr/', show_views.submit_arr, name="submit_arr"),
+
+                  url(r'^allGen/', gens_views.allGen, name="allGen"),
+                  url(r'^gen_detail/', gens_views.gen_detail, name="gen_detail"),
+                  url(r'^get_allGen/', gens_views.get_allGen, name="get_allGen"),
+                  
+                  url(r'^get_allMyDoneSet/', work_views.get_allMyDoneSet, name="get_allMyDoneSet"),
+                  url(r'^view_allMyToDoSet/', work_views.view_allMyToDoSet, name="view_allMyToDoSet"),
+                  url(r'^get_allMyToDoSet/', work_views.get_allMyToDoSet, name="get_allMyToDoSet"),
+                  url(r'^view_allMyDoneSet/', work_views.view_allMyDoneSet, name="view_allMyDoneSet"),
+
+                  url(r'^upload_snap/', expr_views.upload_snap, name="upload_snap"),
+                  url(r'^get_feeling/', expr_views.get_feeling, name="get_feeling"),
+
+                  url(r'^set_detail/', sets_views.set_detail, name="set_detail"),
+                  url(r'^setDisplay/', sets_views.setDisplay, name="setDisplay"),
+                  url(r'^get_allSets/', sets_views.get_allSets, name="get_allSets"),
+                  url(r'^setArrange/', sets_views.setArrange, name="setArrange"),
+
+                  url(r'^get_nextToDo/', Do_Views.get_nextToDo, name="get_nextToDo"),
+                  url(r'^error_answer/', Do_Views.error_answer, name="error_answer"),
+                  url(r'^doEx/', Do_Views.doEx, name="doEx"),
 
                   # 操作：做题/分配/上传等
                   url(r'^upload/', upload_views.upload),
+                  url(r'^get_specificGuide/', upload_views.get_specificGuide, name="get_specificGuide"),
+                  url(r'^viewGuideline/', upload_views.viewGuideline, name="viewGuideline"),
                   url(r'^guide_upload/', upload_views.guide_upload),
                   url(r'^addGuideline/', upload_views.addGuideline, name="addGuideline"),
                   url(r'^delGuideline/', upload_views.delGuideline, name="delGuideline"),
                   url(r'^submit_GuideDel/', upload_views.submit_GuideDel, name="submit_GuideDel"),
-                  url(r'^setArrange/', show_views.setArrange, name="setArrange"),
-                  url(r'^doEx/', show_views.doEx, name="doEx"),
+                  
+                  url(r'^get_all/', Set_views.get_all_set, name="get_all"),
                   url(r'^submit_set/', Set_views.submit_set, name="submit_set"),
-                  url(r'^submit_arr/', show_views.submit_arr, name="submit_arr"),
                   url(r'^makeSet/', Set_views.makeSet),
-                  url(r'^upload_snap/', show_views.upload_snap, name="upload_snap"),
-                  url(r'^get_feeling/', show_views.get_feeling, name="get_feeling"),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

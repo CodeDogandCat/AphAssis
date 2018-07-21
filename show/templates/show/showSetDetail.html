@@ -26,13 +26,13 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
-            <div class="row">
-                <table align="center" width="800" border=1 bordercolor="#00ff99">
+            <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
+                <table align="center" width="80%" border=2 bordercolor="#00ff99">
                     <tbody>
                     <tr>
                         <td colspan="6" align="center"></td>
                     </tr>
-                    <tr>
+                    <tr align="center" style="font-size: 25px" height="45px">
                         <td width="10%">id</td>
                         <td width="42%">问题</td>
                         <td width="12%">选项1</td>
@@ -41,7 +41,7 @@
                         <td width="12%">选项4</td>
                     </tr>
                     {% for row in posts.object_list %}
-                        <tr>
+                        <tr align="center" style="font-size: 20px">
                             <td width="10%">{{ row.id }}</td>
                             <td width="42%">{{ row.question }}</td>
                             <td width="12%"><a class="preview btn btn-info"
@@ -58,7 +58,7 @@
                             </td>
                         </tr>
                     {% endfor %}
-                    <tr>
+                    <tr height="30px" style="font-size: 16px">
                         <td colspan="6" align="center">
                             {% if posts.has_previous %}
                                 <a href="/set_detail?id={{ setid }}&p={{ posts.previous_page_number }}">上一页</a>

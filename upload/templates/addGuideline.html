@@ -25,17 +25,19 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:30%;top:15%;width:75%;height:75%">
-                    <legend>请添加引导语</legend>
+                <fieldset style="position:absolute;left:28%;top:18%;width:75%;height:75%">
+                    <legend style="font-size: 25px">引导语管理</legend>
 
                     <form action="">
-                        <p>选择正确选项</p>
+                        <p style="font-size:20px">选择正确选项</p>
                         <select id="right">
                             {% for x in options %}
                                 <option value="{{ x }}">{{ x }}</option>
                             {% endfor %}
                         </select>
-                        <p>选择患者选项</p>
+                        <br/>
+                        <br/>
+                        <p style="font-size: 20px">选择选错的选项</p>
                         <select id="wrong">
                             {% for x in options %}
                                 <option value="{{ x }}">{{ x }}</option>
@@ -46,7 +48,7 @@
                         <br/>
 
                         <div class="row" align="center">
-                            <button type="button" onclick="viewGuide()" style="position:absolute;left:70%"
+                            <button type="button" onclick="viewGuide()" style="position:absolute;left:60%"
                             >
                                 查询相关引导语
                             </button>
@@ -56,9 +58,9 @@
                     </form>
                     <br/>
                     <br/>
-                    <p>以下是已存在的相关引导语</p>
+                    <p style="font-size: 15px">以下是已存在的相关引导语</p>
                     <table border="1" width="80%">
-                        <tr>
+                        <tr align="center" style="font-size: 17px">
                             <td width="5%">id</td>
                             <td width="15%">正确选项</td>
                             <td width="15%">患者选项</td>
@@ -112,31 +114,25 @@
                         </tr>
 
                     </table>
+                    <br/>
                     <div class="row" align="center">
                         <button type="button" onclick="subPage()"> 上一页</button>
                         <label id="pageNumber"> &nbsp 1 &nbsp </label>
                         <button type="button" onclick="addPage()"> 下一页</button>
-                        <br>
-                    </div>
-                    <br/>
-                    <div class="row" align="center">
                         <button type="button" onclick="delGuide()" style="position:absolute;left:70%">
-                            删除勾选的引导语
+                            删除勾选项
                         </button>
 
                     </div>
+                    
                     <br/>
                     <br/>
-                    <div class="row" align="left" style="width: 80%">
+                    <div class="row" align="left">
                         <input id="newguide" type="text"
-                               placeholder="请输入你要添加的引导语内容" size="80"/>
-
-                    </div>
-                    <br/>
-                    <div class="row" align="center">
+                               placeholder="请输入你要添加的引导语内容" size="75"/>
                         <button type="button" onclick="uploadGuide()" style="position:absolute;left:70%"
                         >
-                            上传引导语
+                            输入完毕,上传
                         </button>
 
                     </div>
@@ -308,7 +304,7 @@
                 data: {"right": String(right_answer), "wrong": String(wrong_answer), 'guide': String(newguide)},
                 success: function (data) {
                     viewGuide();
-                    alert("上传成功");
+                    alert("添加成功!");
                 },
                 error: function (data) {
                     {#alert("Some error!");#}

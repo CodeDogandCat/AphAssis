@@ -25,74 +25,70 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:30%;top:15%;width:75%;height:75%">
-                    <legend>请给患者分配套题</legend>
+                <fieldset style="position:absolute;left:27%;top:17%;width:75%;height:75%">
+                    <legend style="font-size: 25px">请给患者分配套题</legend>
 
                     <form action="">
-                        <p>请在下拉框中选择患者</p>
+                        <p style="font-size: 20px">请在下拉框中选择患者 &nbsp &nbsp &nbsp
                         <select id="patientid">
                             {% for x in patients %}
                                 <option value="{{ x.id }}">{{ x.res_username }}</option>
                             {% endfor %}
                         </select>
+                        </p>
 
-                        <p>请在列表中勾选套题</p>
-                        <table border="1" width="80%">
-                            <tr>
+                        <p style="font-size: 18px">请在列表中勾选套题</p>
+                        <table border="1" width="80%" style="font-size: 20px">
+                            <tr align="center">
                                 <td width="10%">id</td>
                                 <td width="80%">套题的描述</td>
                                 <td width="10%">操作</td>
                             </tr>
-                            <tr>
+                            <tr align="center">
                                 <td id="id1" width="10%">0</td>
                                 <td id="td1" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v1" align="center" type="checkbox" onclick="store(this,0)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center">
                                 <td id="id2" width="10%">0</td>
                                 <td id="td2" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v2" align="center" type="checkbox" onclick="store(this,1)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center">
                                 <td id="id3" width="10%">0</td>
                                 <td id="td3" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v3" align="center" type="checkbox" onclick="store(this,2)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center">
                                 <td id="id4" width="10%">0</td>
                                 <td id="td4" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v4" align="center" type="checkbox" onclick="store(this,3)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center">
                                 <td id="id5" width="10%">0</td>
                                 <td id="td5" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v5" align="center" type="checkbox" onclick="store(this,4)">
                                 </td>
                             </tr>
-
                         </table>
                         <br/>
                         <div class="row" align="center">
                             <button type="button" onclick="subPage()"> 上一页</button>
                             <label id="pageNumber"> &nbsp 1 &nbsp </label>
                             <button type="button" onclick="addPage()"> 下一页</button>
-                            <br>
-                        </div>
-                        <div class="row">
-                            <button type="submit" onclick="submitArr()"
-                                    style="position:absolute;left:65%;top:60%;width:10%;height:10%">
-                                提交套题
+                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                            <button type="submit" onclick="submitArr()">
+                                分配完成
                             </button>
-
                         </div>
 
                     </form>

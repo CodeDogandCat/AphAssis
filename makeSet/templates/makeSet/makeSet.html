@@ -26,36 +26,40 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:30%;top:15%;width:75%;height:75%">
-                    <legend>请从下列题目中选择</legend>
-
+                <fieldset style="position:absolute;left:28%;top:17%;width:75%;height:75%">
+                    <legend style="font-size: 25px">请从下列题目中选择</legend>
+                    <br/>
                     <form action="">
                         <table border="1" width="80%">
-                            <tr>
+                            <tr align="center" style="font-size: 18px">
+                                <td id="td0" width="80%"> 题目 </td>
+                                <td id="td00" width="80%"> 选择 </td>
+                            </tr>
+                            <tr align="center" style="font-size: 18px">
                                 <td id="td1" width="80%"> Loading..</td>
                                 <td width="20%">
                                     <input id="v1" align="center" type="checkbox" onclick="store(this,0)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center" style="font-size: 18px">
                                 <td id="td2" width="80%"> Loading..</td>
                                 <td width="20%">
                                     <input id="v2" align="center" type="checkbox" onclick="store(this,1)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center" style="font-size: 18px">
                                 <td id="td3" width="80%"> Loading..</td>
                                 <td width="20%">
                                     <input id="v3" align="center" type="checkbox" onclick="store(this,2)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center" style="font-size: 18px">
                                 <td id="td4" width="80%"> Loading..</td>
                                 <td width="20%">
                                     <input id="v4" align="center" type="checkbox" onclick="store(this,3)">
                                 </td>
                             </tr>
-                            <tr>
+                            <tr align="center" style="font-size: 18px">
                                 <td id="td5" width="80%"> Loading..</td>
                                 <td width="20%">
                                     <input id="v5" type="checkbox" onclick="store(this,4)">
@@ -71,11 +75,11 @@
                             <br>
                         </div>
                         <div class="row">
-                            <input type="text" style="position:absolute;left:0%;top:40%;width:40%;height:10%"
+                            <input type="text" style="position:absolute;left:0%;top:50%;width:40%;height:10%"
                                    id="setDes"
                                    placeholder="请输入套题描述信息（不超过100字）">
                             <button type="submit" onclick="submitSet()"
-                                    style="position:absolute;left:65%;top:40%;width:10%;height:10%">
+                                    style="position:absolute;left:65%;top:50%;width:10%;height:10%">
                                 提交套题
                             </button>
 
@@ -185,9 +189,9 @@
                 vi.type = "hidden";
             }
             else {
-                td.innerText = "题目：" + all_ques["ques" + (startNum + i)] + "  " + "A:" + all_ques["DesA" + (startNum + i)]
-                    + "B:" + all_ques["DesB" + (startNum + i)] + "C:" + all_ques["DesC" + (startNum + i)]
-                    + "D:" + all_ques["DesD" + (startNum + i)];
+                td.innerText = "问题:" + all_ques["ques" + (startNum + i)] + "   " + "A:" + all_ques["DesA" + (startNum + i)]
+                    + " B:" + all_ques["DesB" + (startNum + i)] + " C:" + all_ques["DesC" + (startNum + i)]
+                    + " D:" + all_ques["DesD" + (startNum + i)];
                 var vi = document.getElementById('v' + (i + 1));
                 vi.type = "checkbox";
                 if (quesCheck[startNum + i]) {

@@ -24,20 +24,20 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
-            <div class="row">
-                <table align="center" width="800" border=1 bordercolor="#00ff99">
+            <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
+                <table align="center" width="80%" border=2 bordercolor="#00ff99" >
                     <tbody>
-                    <tr>
+                    <tr height="45px" style="font-size: 25px">
                         <td colspan="6" align="center">套题列表</td>
                     </tr>
-                    <tr>
+                    <tr style="font-size: 22px" align="center">
                         <td width="10%">id</td>
                         <td width="40%">套题描述</td>
                         <td width="20%">题目数量</td>
                         <td width="20%">操作</td>
                     </tr>
                     {% for row in posts.object_list %}
-                        <tr>
+                        <tr style="font-size: 20px" align="center">
                             <td width="10%">{{ row.id }}</td>
                             <td width="40%">{{ row.setDes }}</td>
                             <td width="20%">{{ row.count }}</td>
@@ -45,7 +45,7 @@
                             </td>
                         </tr>
                     {% endfor %}
-                    <tr>
+                    <tr height="30px" style="font-size: 16px">
                         <td colspan="6" align="center">
                             {% if posts.has_previous %}
                                 <a href="/setDisplay?p={{ posts.previous_page_number }}">上一页</a>

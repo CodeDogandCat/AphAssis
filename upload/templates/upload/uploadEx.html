@@ -25,34 +25,34 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:30%;top:15%;width:75%;height:75%">
-                    <legend>上传题目</legend>
-                    <form action='/upload/' method='post' enctype='multipart/form-data'>
+                <fieldset style="position:absolute;left:27%;top:17%;width:75%;height:75%">
+                    <legend style="font-size: 25px">上传题目 (请注意物品名称保持一致)</legend>
+                    <form action='/upload/' method='post' enctype='multipart/form-data' style="position:absolute;left:1%">
                         {% csrf_token %}
                         <table border="0.5" width="60%">
                             <tr>
-                                <p> 问题 <input type="text" name="question"></p>
+                                <p style="font-size: 18px"> 问题&nbsp &nbsp<input type="text" placeholder="想让患者选择什么物品" name="question"></p>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td width="40%"><p> 图片一 <input type="file" name="imageA"></p></td>
+                                <td width="60%"><p> 物品一名称 <input type="text" name="desA"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片1 <input type="file" name="imageA"></p></td>
-                                <td width="60%"><p> 描述1 <input type="text" name="desA"></p></td>
+                                <td width="40%"><p> 图片二 <input type="file" name="imageB"></p></td>
+                                <td width="60%"><p> 物品二名称<input type="text" name="desB"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片2 <input type="file" name="imageB"></p></td>
-                                <td width="60%"><p> 描述2 <input type="text" name="desB"></p></td>
+                                <td width="40%"><p> 图片三 <input type="file" name="imageC"></p></td>
+                                <td width="60%"><p> 物品三名称<input type="text" name="desC"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片3 <input type="file" name="imageC"></p></td>
-                                <td width="60%"><p> 描述3 <input type="text" name="desC"></p></td>
-                            </tr>
-                            <tr>
-                                <td width="40%"><p> 图片4 <input type="file" name="imageD"></p></td>
-                                <td width="60%"><p> 描述4 <input type="text" name="desD"></p></td>
+                                <td width="40%"><p> 图片四 <input type="file" name="imageD"></p></td>
+                                <td width="60%"><p> 物品四名称 <input type="text" name="desD"></p></td>
                             </tr>
                             <tr>
                                 <p><input type="submit" value="提交"
-                                          style="position:absolute;left:65%;top:50%;width:10%;height:10%">
-                                </p>
+                                    style="position:absolute;left:35%;top:106%;width:13%;height:13%"></p>
                             </tr>
                         </table>
                     </form>

@@ -35,7 +35,7 @@ def gen_detail(request):
             for wrong_pair in w_list:
                 ls = str(wrong_pair).split('@')
                 wrong_ques_id = ls[0]
-                wrong_log = ls[1]
+                #wrong_log = ls[1]  
                 w_str += str(wrong_ques_id) + ','
             if w_str.endswith(','):
                 w_str = w_str[0:len(w_str) - 1]

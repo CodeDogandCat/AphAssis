@@ -24,22 +24,22 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
-            <div class="row">
-                <table align="center" width="800" border=1 bordercolor="#00ff99">
+            <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
+                <table align="center" width="80%" border=2 bordercolor="#00ff99">
                     <tbody>
-                    <tr>
-                        <td colspan="6" align="center">套题列表</td>
+                    <tr height="35px">
+                        <td colspan="6" align="center" style="font-size: 24px">套题列表</td>
                     </tr>
-                    <tr>
-                        <td width="30%">套题描述</td>
-                        <td width="10%">布置时间</td>
-                        <td width="10%">是否完成</td>
-                        <td width="10%">完成时间</td>
+                    <tr align="center" style="font-size: 18px">
+                        <td width="21%">套题描述</td>
+                        <td width="13%">布置时间</td>
+                        <td width="13%">是否完成</td>
+                        <td width="13%">完成时间</td>
                         <td width="10%">所花时间</td>
                         <td width="30%">错题</td>
                     </tr>
                     {% for row in posts.object_list %}
-                        <tr>
+                        <tr align="center" style="font-size: 16px">
                             <td width="30%">{{ row.name }}</td>
                             <td width="10%">{{ row.arrtime }}</td>
                             <td width="10%">{{ row.status }}</td>

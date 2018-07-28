@@ -25,7 +25,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-head-line">失语症康复诊疗辅助系统</h1>
+                    {% if classid == 1 %}
                     <h1 class="page-subhead-line">欢迎来到失语症康复诊疗辅助系统,期待您能治愈更多的失语症患者 </h1>
+                    {% elif classid == 0 %}
+                    <h1 class="page-subhead-line">&nbsp 祝您能够早日康复 </h1>
+                    {% endif %}
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -49,7 +53,7 @@
 </div>
 <!-- /. WRAPPER  -->
 
-<div id="footer-sec">
+<div id="footer-sec" align="center">
     &copy; 2018 BH
 </div>
 <!-- /. FOOTER  -->

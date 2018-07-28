@@ -24,6 +24,12 @@ body {
  transform:translateY(0)
 }
 
+table{
+	border-radius: 5px;
+	border:1;
+	width:80%
+}
+
 .header {
  height:3.4375rem;
  background-color:#2EA3FD;

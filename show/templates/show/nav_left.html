@@ -26,7 +26,7 @@
 
                     <div class="inner-text">
                         {% if classid == 0 %}
-                            患者: {{ username }}
+                            用户: {{ username }}
                         {% elif classid == 1 %}
                             医生: {{ username }}
                         {% endif %}
@@ -35,8 +35,8 @@
                         <small id="emotions">Welcome!</small>
                     </div>
                 </div>
-
             </li>
+            
             {#                //医生可见#}
             {% if classid == 1 %}
                 <li>
@@ -81,6 +81,9 @@
                 </li>
                 {#                    患者可见#}
             {% elif classid == 0 %}
+                <li>
+                    <a class="active-menu" href="/index/"><i class="fa fa-dashboard "></i>菜单</a>
+                </li>
                 <li>
                     <a href="#"><i class="fa fa-desktop "></i>查询 <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

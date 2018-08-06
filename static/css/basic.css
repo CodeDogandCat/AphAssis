@@ -21,9 +21,9 @@ body {
 #page-inner {
     width: 100%;
     margin: 10px 20px 10px 0px;
-    background-color: #fff!important;
+    background-color: #fff7c0!important;
     padding: 10px;
-    min-height: 1200px;
+    min-height: 700px;
 }
 
 .page-head-line {
@@ -60,7 +60,12 @@ body {
 
 .navbar-cls-top .navbar-brand {
     color: #fff;
-    background: #202020;
+    /*background: #30415D;*/
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
     width: 260px;
     text-align: center;
     height: 75px;
@@ -79,14 +84,18 @@ body {
 }
 
 .navbar-cls-top .navbar-brand:hover {
-    background: #202020;
+    background: #003366;
     color: #fff;
 }
 
 .user-img-div {
     min-height: 140px;
     padding: 20px;
-    background-color: #4380B8;
+    /*background-color: #99CC66;*/
+    background: #76b852;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #8DC26F, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #8DC26F, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
     .user-img-div img {
@@ -102,7 +111,10 @@ body {
     }
 
 .active-menu {
-    background-color: #00CA79!important;
+	background-color: #00db83!important;
+    /*background-color: #7c44ff!important;*/
+    /*background-color: #6c32f2!important;*/
+    /*background-color: #6928ff!important;*/
 }
 .active-menu-top {
     background-color: #000!important;
@@ -144,19 +156,23 @@ body {
 
         .sidebar-collapse .nav > li > a {
             color: #fff;
-            background: #202020;
+            background: #F7882F;
             text-shadow: none;
             padding: 15px 40px;
-            border-bottom: 1px solid #2F2E31;
+            border-bottom: 1px solid #07889B;
         }
 
     .sidebar-collapse > .nav > li > a {
+        background: #5e75a8;
+        /*background: #96858F;*/
         padding: 15px 10px;
     }
 
-    .sidebar-collapse .nav > li > a:hover,
+    .sidebar-collapse .nav > li > a:hover{
+        background: #dda756;
+    }
     .sidebar-collapse .nav > li > a:focus {
-        background: #0A0A0A;
+        background: #d67b57;
         outline: 0;
     }
 
@@ -178,7 +194,7 @@ body {
 }
 
 .navbar-cls-top {
-    background: #00CA79;
+    background: #CCCCCC;
     border-bottom: none;
 }
 
@@ -188,7 +204,7 @@ body {
 }
 
 .navbar-header {
-    background: #000000;
+    background: #99D3DF;
 }
 
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
@@ -206,6 +222,7 @@ body {
 .nav > li > a > i {
     margin-right: 10px;
 }
+
 /*==============================================
     FOOTER  STYLES    
     =============================================*/
@@ -231,7 +248,7 @@ body {
     #page-wrapper {
         margin: 0 0 0 260px;
         padding: 15px 30px;
-        min-height: 1200px;
+        min-height: 700px;
     }
 
 

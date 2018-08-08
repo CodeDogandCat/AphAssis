@@ -4,7 +4,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>上传题目</title>
-
+    <!--BUTTON STYLES-->
+    <link href="../static/css/bttn.css" rel="stylesheet"/>
     <!-- BOOTSTRAP STYLES-->
     <link href="../static/css/bootstrap.css" rel="stylesheet"/>
     <!-- FONTAWESOME STYLES-->
@@ -17,6 +18,70 @@
     <link href="../static/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+
+    <style>
+    		/*样式1*/
+    	.a-upload {
+			padding: 4px 10px;
+			height: 40px;
+			line-height: 20px;
+			position: relative;
+			cursor: pointer;
+			color: #888;
+			background: #fafafa;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			overflow: hidden;
+			display: inline-block;
+			*display: inline;
+			*zoom: 1
+		}
+		
+		.a-upload  input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+			filter: alpha(opacity=0);
+			cursor: pointer
+		}
+		
+		.a-upload:hover {
+			color: #444;
+			background: #eee;
+			border-color: #ccc;
+			text-decoration: none
+		}
+		/*样式2*/
+		.file {
+			position: absolute;
+			display: inline-block;
+			background: #D0EEFF;
+			border: 1px solid #99D3F5;
+			border-radius: 4px;
+			padding: 4px 12px;
+			overflow: hidden;
+			color: #1E88C7;
+			text-decoration: none;
+			text-indent: 0;
+			line-height: 20px;
+		}
+		.file input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+		}
+		.file:hover {
+			background: #AADFFD;
+			border-color: #78C3F3;
+			color: #004974;
+			text-decoration: none;
+		}		
+    </style>
+
 </head>
 <body>
 <div id="wrapper">
@@ -25,29 +90,33 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
-                <fieldset style="position:absolute;left:27%;top:17%;width:75%;height:75%">
+                <fieldset style="position:absolute;left:27%;top:18%;width:75%;height:90%">
                     <legend style="font-size: 25px">上传题目 (请注意物品名称保持一致)</legend>
                     <form action='/upload/' method='post' enctype='multipart/form-data' style="position:absolute;left:1%">
                         {% csrf_token %}
+                        <br/>
                         <table border="0.5" width="60%">
                             <tr>
                                 <p style="font-size: 18px"> 问题&nbsp &nbsp<input type="text" placeholder="想让患者选择什么物品" name="question"></p>
                             </tr>
-                            <br/>
-                            <tr>
-                                <td width="40%"><p> 图片一 <input type="file" name="imageA"></p></td>
+                            <tr >
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片一 <input type="file" name="imageA" id="UPA" onchange="viewmyPic(showImg,this.form.UPA);"></p></td>
+                               
                                 <td width="60%"><p> 物品一名称 <input type="text" name="desA"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片二 <input type="file" name="imageB"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片二 <input type="file" name="imageB" id="UPB" onchange="viewmyPic(showImg1,this.form.UPB);"></p></td>
+
                                 <td width="60%"><p> 物品二名称<input type="text" name="desB"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片三 <input type="file" name="imageC"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片三 <input type="file" name="imageC" id="UPC" onchange="viewmyPic(showImg2,this.form.UPC);"></p></td>
+                                
                                 <td width="60%"><p> 物品三名称<input type="text" name="desC"></p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p> 图片四 <input type="file" name="imageD"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片四 <input type="file" name="imageD" id="UPD" onchange="viewmyPic(showImg3,this.form.UPD);"></p></td>
+                                
                                 <td width="60%"><p> 物品四名称 <input type="text" name="desD"></p></td>
                             </tr>
                             <tr>
@@ -57,6 +126,17 @@
                         </table>
                     </form>
                 </fieldset>
+              
+                <table border="0.5" width="40%" style="position:absolute;left:70%;top:30%;width:40%;height:50%">
+                	<tr>
+                		<td><img name="showImg" id="showImg" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
+                		<td><img name="showImg1" id="showImg1" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
+                	</tr>            
+                	<tr>
+                		<td><img name="showImg2" id="showImg2" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
+                		<td><img name="showImg3" id="showImg3" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
+                	</tr>            
+                </table>
             </div>
         </div>
     </div>
@@ -79,7 +159,23 @@
 <!-- CUSTOM Gallery Call SCRIPTS -->
 <script src="../static/js/galleryCustom.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-
+<script>
+function viewmyPic(mypic,upfile){
+	if(upfile.files && upfile.files[0]){
+		mypic.style.display = "";
+		//mypic.src = upfile.files[0].getAsDataURL();
+		mypic.src = window.URL.createObjectURL(upfile.files[0]);
+	}
+	else{
+		alert("B");
+		if(upfile.value){
+			mypic.src = upfile.value;
+			mypic.style.display = "";
+			mypic.border = 1;
+		}
+	}
+}
+</script>>
 </body>
 </html>
 

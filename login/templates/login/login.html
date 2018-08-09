@@ -12,20 +12,28 @@
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
+    <style>
+    	.body_back{
+    		background: #fdbb2d;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #22c1c3,#fdbb2d);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #22c1c3, #fdbb2d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    	}
+    </style>
+
 </head>
-<body style="background-color: #E2E2E2;">
-<div class="container">
+<body class="body_back">
+<div class="container" >
     <div class="row text-center " style="padding-top:100px;">
         <div class="col-md-12">
             <img width="200" height="200" src="../../../static/image/Tree.jpeg"/>
         </div>
     </div>
-    <div class="row ">
+    <div class="row">
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
             <div class="panel-body">
-                <form role="form">
+                <form role="form" border>
                     <hr/>
-                    <h2>登录</h2>
+                    <h2 align="center">登录</h2>
                     <br/>
                     <div class="form-group input-group">
                         <span class="input-group-addon"><i class="fa fa-tag"></i></span>

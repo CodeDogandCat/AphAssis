@@ -35,11 +35,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import staticfiles
 
 urlpatterns = [
-                  # 账户登录 注册
+                  # 账户登录 注册 设置
                   url(r'^admin/', admin.site.urls),
                   url(r'^login/', login_views.login),
                   url(r'^logout/', login_views.logout),
                   url(r'^register/', login_views.nregister),
+                  url(r'^set_sound/', login_views.viewSetSound),
+                  url(r'^save_sound/', login_views.saveSoundSetting),
+                  url(r'^get_sound/', login_views.getSound),
 
                   # 页面显示
                   url(r'^index/', show_views.index),
@@ -49,7 +52,7 @@ urlpatterns = [
                   url(r'^allGen/', gens_views.allGen, name="allGen"),
                   url(r'^gen_detail/', gens_views.gen_detail, name="gen_detail"),
                   url(r'^get_allGen/', gens_views.get_allGen, name="get_allGen"),
-                  
+
                   url(r'^get_allMyDoneSet/', work_views.get_allMyDoneSet, name="get_allMyDoneSet"),
                   url(r'^view_allMyToDoSet/', work_views.view_allMyToDoSet, name="view_allMyToDoSet"),
                   url(r'^get_allMyToDoSet/', work_views.get_allMyToDoSet, name="get_allMyToDoSet"),
@@ -75,7 +78,7 @@ urlpatterns = [
                   url(r'^addGuideline/', upload_views.addGuideline, name="addGuideline"),
                   url(r'^delGuideline/', upload_views.delGuideline, name="delGuideline"),
                   url(r'^submit_GuideDel/', upload_views.submit_GuideDel, name="submit_GuideDel"),
-                  
+
                   url(r'^get_all/', Set_views.get_all_set, name="get_all"),
                   url(r'^submit_set/', Set_views.submit_set, name="submit_set"),
                   url(r'^makeSet/', Set_views.makeSet),

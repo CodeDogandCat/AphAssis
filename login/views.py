@@ -1,11 +1,13 @@
-from django.contrib.auth import authenticate
+from __future__ import unicode_literals
+
 import json
+
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect
-from django.template.loader import get_template
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
 
 from login.models import register
+from upload.models import guide
 
 user_id = -1
 Login_user = ''
@@ -71,3 +73,45 @@ def nregister(request):
             resp = {'status': 'success', 'reason': '注册成功'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
     return render(request, 'login/register.html')
+
+
+# 设置语音页面
+def viewSetSound(request):
+    username = request.session['username']
+    classid = request.session['classid']
+    # 获取用户的设置
+    cur_setting = "郭德纲"
+    # 获取可能的选择
+    # option_list = list(Ques.objects.all())
+    ans = set()
+    ans.add("习近平")
+    ans.add("单田芳")
+    ans.add("赵本山")
+    ans.add("郭德纲")
+    ans.add("林志玲")
+    res = list(ans)
+    return render(request, 'login/setSound.html',
+                  {'username': username, 'classid': classid, 'cur_sound_name': cur_setting, 'options': res})
+
+
+# 设置语音偏好
+def saveSoundSetting(request):
+    if request.method == 'POST':
+        sound_name = request.POST.get('sound_name', None)  # 从前端的输入框里获取输入
+
+        # 更新数据库
+        print("更新数据库" + str(sound_name))
+
+        ####
+    return JsonResponse({"status": 1})
+
+
+# 生成语音
+def getSound(request):
+    test_text = ""
+    if request.method == 'POST':
+        test_text = request.POST.get('test_text', None)  # 从前端的输入框里获取输入
+
+        print("生成语音" + str(test_text))
+
+    return JsonResponse({"sound": str(test_text), "status": 1})

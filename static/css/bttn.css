@@ -70,16 +70,15 @@
 }
 .bttn-float {
   margin: 0;
-  padding: 0;
   border-width: 0;
   border-color: transparent;
   background: transparent;
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   position: relative;
   font-size: 20px;
   font-family: inherit;
-  padding: 5px 12px;
+  padding: 5px 0px;
   overflow: hidden;
   text-decoration: none;
   display:inline-block;
@@ -131,7 +130,7 @@
 .bttn-float.bttn-md {
   font-size: 20px;
   font-family: inherit;
-  padding: 5px 12px;
+  padding: 2px 5px;
 }
 .bttn-float.bttn-md:hover,
 .bttn-float.bttn-md:focus {
@@ -172,6 +171,7 @@
   border-color: #28b78d;
   background: rgba(40,183,141,0.4);
   color: #28b78d;
+  margin-top: 20px;
 }
 .bttn-float.bttn-royal {
   border-color: #bd2df5;

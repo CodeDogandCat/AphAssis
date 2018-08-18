@@ -24,6 +24,7 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
+       		<button id="button" onclick="toChart()"> 套题总览 </button>
             <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
                 <table align="center" width="80%" border=2 bordercolor="#00ff99">
                     <tbody>
@@ -92,6 +93,10 @@
 <script src="../static/js/galleryCustom.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
+	function toChart(){
+		location.href = "/chart/";
+	}
+
     function confirmAct() {
         var msg = "您真的确定要退出吗？\n\n请确认！";
         if (confirm(msg) == true) {

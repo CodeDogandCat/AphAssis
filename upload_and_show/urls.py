@@ -52,6 +52,7 @@ urlpatterns = [
                   url(r'^allGen/', gens_views.allGen, name="allGen"),
                   url(r'^gen_detail/', gens_views.gen_detail, name="gen_detail"),
                   url(r'^get_allGen/', gens_views.get_allGen, name="get_allGen"),
+                  url(r'^chart/',gens_views.gen_chart,name="gen_chart"),
 
                   url(r'^get_allMyDoneSet/', work_views.get_allMyDoneSet, name="get_allMyDoneSet"),
                   url(r'^view_allMyToDoSet/', work_views.view_allMyToDoSet, name="view_allMyToDoSet"),

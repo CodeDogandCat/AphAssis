@@ -6,6 +6,10 @@ reference = os.path.join(THIS_FOLDER,'reference.py')
 exec(open(reference).read())
 
 
+def gen_chart(request):
+    username = request.session['username']
+    classid = request.session['classid']
+    return render(request, 'show/genChart.html', {'username': username, 'classid': classid})
 
 # 显示患者的详细信息
 def gen_detail(request):

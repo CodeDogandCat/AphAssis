@@ -38,6 +38,7 @@ def get_all_set(request):
         ans["DesD" + str(i)] = str(questions[i].DesD)
         ans["voice" + str(i)] = str(questions[i].voice)
     # toList.append(deepcopy(ans))
+    print(ans)
 
     return JsonResponse(ans)
 

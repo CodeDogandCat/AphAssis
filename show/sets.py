@@ -78,6 +78,8 @@ def get_allSets(request):
         ans["setDes" + str(i)] = str(sets[i].setDes)
         ans["count" + str(i)] = str(len(str(sets[i].questions).split(',')))
         ans["questions" + str(i)] = str(sets[i].questions)
+    print("get all sets")
+    print(ans)
 
     return JsonResponse(ans)
 

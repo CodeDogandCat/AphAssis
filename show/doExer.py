@@ -79,7 +79,7 @@ def error_answer(request):
 # 获取指定id的套题的题目的下一道题
 @csrf_exempt
 def get_nextToDo(request):
-    # print('get next to do......')
+    print('get next to do......')
     global number
     global questions
     global length

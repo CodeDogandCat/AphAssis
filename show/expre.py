@@ -7,7 +7,7 @@ exec(open(reference).read())
 
 #表情识别
 # 存储用户表情识别结果
-regs = []
+# regs = []
 
 
 # 前端上传摄像头截图
@@ -33,7 +33,7 @@ def upload_snap(request):
 
         #print("表情为： ")
         #print(res)
-        return JsonResponse({"face_reg_test": res})
+        return JsonResponse({"face_reg_test": res[:-1]})
     # return JsonResponse({"face_reg_test": []})
 
 
@@ -42,10 +42,12 @@ def upload_snap(request):
 def get_feeling(request):
     if request.method == 'POST':
         # 深拷贝
-        tmp = regs[:]
-        regs.clear()
+        # tmp = regs[:]
+        # regs.clear()
         ##print("历史表情: ")
         ##print(tmp)
-        if len(tmp) == 0:
-            tmp = [0]
-        return JsonResponse({"feeling": tmp})
+        # if len(tmp) == 0:
+        #     tmp = [0]
+        snap_base64 = request.POST.get('snap_base64', None)
+        res = get_emotion(snap_base64)
+        return JsonResponse({"feeling": res})

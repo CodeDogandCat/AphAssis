@@ -11,6 +11,7 @@ exec(open(reference).read())
 
 # 获取已经完成的所有任务
 def get_allMyDoneSet(request):
+    print('get_allMyDoneSet')
     userid = request.session['userid']
     # print('current user id ": ' + str(userid))
     arrs = list(Arrange_set.objects.filter(userid=userid, status=1).order_by("-arrTime"))
@@ -33,6 +34,7 @@ def get_allMyDoneSet(request):
 
 # 获取要做的所有任务
 def get_allMyToDoSet(request):
+    print('get_allMyToDoSet')
     userid = request.session['userid']
     # print('current user id ": ' + str(userid))
     arrs = list(Arrange_set.objects.filter(userid=userid, status=0).order_by("-arrTime"))
@@ -47,6 +49,7 @@ def get_allMyToDoSet(request):
         ans["arr_datetime" + str(i)] = str(dt_new)
         ans["arr_userid" + str(i)] = str(arrs[i].userid)
     # toList.append(deepcopy(ans))
+    print(ans)
     return JsonResponse(ans)
 
 
@@ -54,7 +57,7 @@ def get_allMyToDoSet(request):
 def view_allMyToDoSet(request):
     username = request.session['username']
     classid = request.session['classid']
-
+    print('view_allMyToDoSet')
     return render(request, 'show/showMyToDoSet.html', {'username': username, 'classid': classid})
 
 
@@ -62,5 +65,5 @@ def view_allMyToDoSet(request):
 def view_allMyDoneSet(request):
     username = request.session['username']
     classid = request.session['classid']
-
+    print('view_allMyDoneSet')
     return render(request, 'show/showMyDoneSet.html', {'username': username, 'classid': classid})

@@ -5,7 +5,7 @@ def get_emotion(snap_base64):
     #print(snap_base64)
     print("模型收到的base64参数长度")
     print(len(snap_base64))
-    res=testModel.get_emotion(snap_base64, True)
+    res=testModel.get_emotion(snap_base64, False)
     print("识别结果")
     print(res)
     return res

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import os 
+import os
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-reference = os.path.join(THIS_FOLDER,'reference.py')
+reference = os.path.join(THIS_FOLDER, 'reference.py')
 
 exec(open(reference).read())
-
 
 
 # 训练
@@ -46,20 +46,18 @@ def error_answer(request):
     if len(Guider) > 0:
         ###算法调用
         ### 1, collab filter
-        collab_tip_id=collaborative_filtering(user_id,ques_id,current_wrong_option)
+        collab_tip_id = collaborative_filtering(user_id, ques_id, current_wrong_option)
         if collab_tip_id is not None:
-            recom_guide_id=collab_tip_id
+            recom_guide_id = collab_tip_id
             # 查具体引导语信息
-            result=guide.objects.get(id=recom_guide_id).tips
+            result = guide.objects.get(id=recom_guide_id).tips
         else:
             ### 2, 多臂老虎机
             ### 3，random
 
-
-
             tip = random.sample(Guider, 1)
-            print('random guide id :'+tip[0].id)
-            recom_guide_id=tip[0].id
+            print('random guide id :' + str(tip[0].id))
+            recom_guide_id = tip[0].id
             result = tip[0].tips
         # 完善答错题记录
         if current_ques_id != -1:

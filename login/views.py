@@ -80,7 +80,8 @@ def viewSetSound(request):
     username = request.session['username']
     classid = request.session['classid']
     # 获取用户的设置
-    cur_setting = "郭德纲"
+    user=register.objects.get(res_username=username)
+    cur_setting = user.selected_speech
     # 获取可能的选择
     # option_list = list(Ques.objects.all())
     ans = set()
@@ -96,9 +97,13 @@ def viewSetSound(request):
 
 # 设置语音偏好
 def saveSoundSetting(request):
+    username = request.session['username']
+    classid = request.session['classid']
     if request.method == 'POST':
         sound_name = request.POST.get('sound_name', None)  # 从前端的输入框里获取输入
-
+        user = register.objects.get(res_username=username)
+        user.selected_speech=sound_name
+        user.save()
         # 更新数据库
         print("更新数据库" + str(sound_name))
 

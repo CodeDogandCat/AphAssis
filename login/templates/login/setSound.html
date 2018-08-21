@@ -119,7 +119,9 @@
                 url: "http://127.0.0.1:8000/save_sound/",
                 data: {"sound_name": String(sound_name)},
                 success: function (data) {
+                    location.reload()
                     alert("保存成功!");
+
                 },
                 error: function (data) {
                     {#alert("Some error!");#}

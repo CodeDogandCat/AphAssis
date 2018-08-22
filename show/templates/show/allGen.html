@@ -37,12 +37,16 @@
                             </tr>
                             <tr height="35px">
                                 <td width="30%" align="center" style="font-size: 23px">患者姓名</td>
-                                <td width="30%" align="center" style="font-size: 23px">操作</td>
+                                <td width="30%" align="center" style="font-size: 23px">档案设置</td>
+                                <td width="30%" align="center" style="font-size: 23px">治疗详情</td>
                             </tr>
                             {% for row in posts.object_list %}
                                 <tr>
                                     <td width="30%" align="center" style="font-size: 18px">{{ row.res_username }}</td>
-                                    <td width="30%" align="center" style="font-size: 18px"><a href="/gen_detail?id={{ row.id }}">查看详情</a>
+                                    <td width="30%" align="center" style="font-size: 18px"><a
+                                            href="/get_patient_account?id={{ row.id }}">设置</a>
+                                    <td width="30%" align="center" style="font-size: 18px"><a
+                                            href="/gen_detail?id={{ row.id }}">查看</a>
                                     </td>
                                 </tr>
                             {% endfor %}

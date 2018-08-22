@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-import os 
+import os
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-reference = os.path.join(THIS_FOLDER,'reference.py')
-expre = os.path.join(THIS_FOLDER,'expre.py')
+reference = os.path.join(THIS_FOLDER, 'reference.py')
+expre = os.path.join(THIS_FOLDER, 'expre.py')
 
 exec(open(reference).read())
 exec(open(expre).read())
+from login.models import register
 
 
 def index(request):
@@ -64,8 +66,6 @@ def showAllEx(request):
     return render(request, 'show/showAllEx.html', {'posts': posts, 'username': username, 'classid': classid})
 
 
-
-
 @csrf_exempt
 def submit_arr(request):
     l = request.POST.get("setsCheck", None).split(',')
@@ -80,3 +80,47 @@ def submit_arr(request):
         new_arr.save()
 
     return JsonResponse({"status": 1})
+
+
+def get_patient_account(request):
+    username = request.session['username']
+    classid = request.session['classid']
+    patientid = request.GET.get("id", None)
+    print("patientid " + str(patientid))
+    patient = register.objects.get(id=int(patientid))
+    res_username = "" if patient.res_username is None else patient.res_username
+    res_password = "" if patient.res_password is None else patient.res_password
+    res_email = "" if patient.res_email is None else patient.res_email
+    age = "" if patient.age is None else patient.age
+    profession = "" if patient.profession is None else patient.profession
+    education = "" if patient.education is None else patient.education
+    training_start_period = "" if patient.training_start_period is None else patient.training_start_period
+    severe = "" if patient.severe is None else patient.severe
+    comorbidity_disease = "" if patient.comorbidity_disease is None else patient.comorbidity_disease
+    primary_disease = "" if patient.primary_disease is None else patient.primary_disease
+    type_of_aphasia = "" if patient.type_of_aphasia is None else patient.type_of_aphasia
+    personality = "" if patient.personality is None else patient.personality
+    intelligence = "" if patient.intelligence is None else patient.intelligence
+    language_background = "" if patient.language_background is None else patient.language_background
+    self_correcting_ability = "" if patient.self_correcting_ability is None else patient.self_correcting_ability
+    # toList.append(deepcopy(ans))
+    return render(request, 'show/patientArchives.html', {'res_username': res_username,
+                                                         'res_password': res_password,
+                                                         'res_email': res_email,
+                                                         'age': age,
+                                                         'profession': profession,
+                                                         'education': education,
+                                                         'training_start_period': training_start_period,
+                                                         'severe': severe,
+                                                         'comorbidity_disease': comorbidity_disease,
+                                                         'primary_disease': primary_disease,
+                                                         'type_of_aphasia': type_of_aphasia,
+                                                         'personality': personality,
+                                                         'intelligence': intelligence,
+                                                         'language_background': language_background,
+                                                         'self_correcting_ability': self_correcting_ability,
+                                                         'username': username, 'classid': classid})
+
+
+def save_patient_account(request):
+    pass

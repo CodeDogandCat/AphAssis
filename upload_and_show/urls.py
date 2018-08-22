@@ -48,6 +48,8 @@ urlpatterns = [
                   url(r'^index/', show_views.index),
                   url(r'^show/', show_views.showAllEx),
                   url(r'^submit_arr/', show_views.submit_arr, name="submit_arr"),
+                  url(r'^get_patient_account/', show_views.get_patient_account, name="get_patient_account"),
+                  url(r'^save_patient_account/', show_views.save_patient_account, name="save_patient_account"),
 
                   url(r'^allGen/', gens_views.allGen, name="allGen"),
                   url(r'^gen_detail/', gens_views.gen_detail, name="gen_detail"),

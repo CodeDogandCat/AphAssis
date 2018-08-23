@@ -19,3 +19,8 @@ class register(models.Model):
     language_background = models.CharField(max_length=30, null=True)
     self_correcting_ability = models.IntegerField(default=0)
     selected_speech = models.CharField(max_length=30, null=True)
+
+class familiarity(models.Model):
+    res_id = models.IntegerField(null=True)
+    word = models.CharField(max_length=30,null=True)
+    score = models.IntegerField(default=50)

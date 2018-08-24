@@ -133,3 +133,30 @@ def get_allGen(request):
         ans["gen" + str(i)] = str(Gen[i].res_username)
     # toList.append(deepcopy(ans))
     return JsonResponse(ans)
+
+
+def word_fam(request):
+    '''
+    ques_list = list(Ques.objects.all())
+    gens = list(register.objects.filter(res_id=0)) 
+    word_list = set()
+    gen_list = set()
+    for user in gens:
+        gen_list.add(user.res_username)
+
+    for item in ques_list:
+        if item.DesA not in word_list:
+            word_list.add(item.DesA)
+        if item.DesB not in word_list:
+            word_list.add(item.DesB)
+        if item.DesC not in word_list:
+            word_list.add(item.DesC)
+        if item.DesD not in word_list:
+            word_list.add(item.DesD)
+    '''
+    username = request.session['username']
+    classid = request.session['classid']
+    #word_list = list(word_list)
+    #gen_list = list(gen_list)
+    
+    return render(request,'show/word_fam.html',{'username':username,'classid':classid})

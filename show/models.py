@@ -45,3 +45,17 @@ class wrong_record(models.Model):
 
 class vocab(models.Model):
     word=models.CharField(max_length=20, null=True)
+
+
+class answer_sequence(models.Model):
+    user_no = models.IntegerField(default=-1)  #数据库里面该用户对应的数据项的id,不是用户自己写的id
+    question_no = models.IntegerField(default=-1)  #同上,题目id也对应着词,记录的是用户对这道题的考核的词的熟悉程度
+    times = models.IntegerField(default=0)  #答这道题的次数,3次就要更新
+    sequence = models.IntegerField(default=0)  #使用二进制方式保存三次的答题情况 (r1,r2,r3)因为都是0,1存成整数
+
+    '''
+    A_one_line = models.FloatField(default=0.7)  #A矩阵第一行第一个数,每一行的和是1
+    A_two_line = models.FloatField(default=0.25)  #A矩阵第二行第一个数
+    B_one_line = models.FloatField(default=0.6)  #B矩阵第一行第一个数
+    B_two_line = models.FloatField(default=0.25) #B矩阵第二行第一个数
+	'''

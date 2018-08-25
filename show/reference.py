@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 import json
 import random
-import numpy
-from numpy import *
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from upload.models import Ques, guide

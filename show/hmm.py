@@ -101,6 +101,9 @@ if __name__ == "__main__":
 
     A=matrix(A,status,status)
     B=matrix(B,status,observations)
+    print(Pi)
+    print(A)
+    print(B)
     hmm=HMM(A,B,Pi)
 
     list = hmm.baum_welch(O)

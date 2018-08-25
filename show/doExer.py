@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
-import numpy
-from numpy import *
-from show.filtering import *
+import show.filtering as fil
+import show.hmm as _hmm
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 reference = os.path.join(THIS_FOLDER, 'reference.py')
@@ -10,6 +9,7 @@ reference = os.path.join(THIS_FOLDER, 'reference.py')
 exec(open(reference).read())
 
 from login.models import familiarity
+
 
 # 训练
 def doEx(request):
@@ -32,8 +32,6 @@ def error_answer(request):
     user_id = request.POST.get('user_id', None)
     wrong_answer = request.POST.get('wrong_choice_id', None)
 
-    check_record(user_id,ques_id,0)   ##都需要用绝对id
-
     # 保存用户完整的答错题过程
     setid = request.POST.get("setid", None)
     arrid = request.POST.get("arrid", None)
@@ -46,14 +44,16 @@ def error_answer(request):
         wrong_pair[str(error_no)] = ''  # 用来保存错题-错误选项-有效引导语  对
 
     right = request.POST.get('right', None)
+    print("before check_record")
+    check_record(user_id, ques_id, right, 0)  ##都需要用绝对id
     wrong = request.POST.get('wrong', None)
     Guider = list(guide.objects.filter(right_answer=right, wrong_answer=wrong))
 
     if len(Guider) > 0:
         ##---------------现在是BKT算法的添加-------------
-        answer_familiarity = list(familiarity.objects.filter(res_id=user_id,word=right))
-        wrong_familiarity = list(familiarity.objects.filter(res_id=user_id,word=wrong))
-        if len(wrong_familiarity)==0 or len(answer_familiarity)==0:
+        answer_familiarity = list(familiarity.objects.filter(res_id=user_id, word=right))
+        wrong_familiarity = list(familiarity.objects.filter(res_id=user_id, word=wrong))
+        if len(wrong_familiarity) == 0 or len(answer_familiarity) == 0:
             print("Word Database Missing for user: " + str(user_id) + "!!!!")
         else:
             score_sum = answer_familiarity[0].score
@@ -61,8 +61,8 @@ def error_answer(request):
 
             score_aver = score_sum / 200
 
-            recom_guide_id = fil.filtering(Guider,score_aver)
-            if recom_guide_id not in range(0,len(Guider)):
+            recom_guide_id = fil.filtering(Guider, score_aver)
+            if recom_guide_id not in range(0, len(Guider)):
                 tip = random.sample(Guider, 1)
                 print('random guide id :' + str(tip[0].id))
                 recom_guide_id = tip[0].id
@@ -70,7 +70,7 @@ def error_answer(request):
             else:
                 result = Guider[recom_guide_id].tips
             return JsonResponse({"guide": result, 'id': recom_guide_id})
-	    ##-------------------------------------------
+            ##-------------------------------------------
     else:
         tip = ""
         # 完善答错题记录
@@ -79,51 +79,62 @@ def error_answer(request):
             wrong_pair[str(current_ques_id)] += str(current_wrong_option) + str('#') + str(-1) + str('<')
         return JsonResponse({"guide": tip, 'id': -1})
 
-def to_bin(seq_value):
-	seq = []
-	for i in range(0,3):
-		seq.append(seq_value % 2)
-		seq_value = (int)(seq_value / 2)
-	return seq.reverse()
 
-def check_record(_user_no,_ques_no,_ques_ans,score):
+def to_bin(seq_value):
+    seq_value=int(seq_value)
+    seq = []
+    for i in range(0, 3):
+        seq.append(seq_value % 2)
+        seq_value = (int)(seq_value / 2)
+    seq.reverse()
+    return seq
+
+
+def check_record(_user_no, _ques_no, _ques_ans, score):
     global BKT_A
     global BKT_B
-    
-    record = list(answer_sequence.objects.filter(user_no=_user_no,question_no=_ques_no))
-    
 
-    if len(record == 0):
+    record = list(answer_sequence.objects.filter(user_no=_user_no, question_no=_ques_no))
+
+    if len(record) == 0:
         new_record = answer_sequence(
-				user_no = _user_no,
-				question_no = _ques_no,
-				times = 1,
-				sequence = score   
-			)
+            user_no=_user_no,
+            question_no=_ques_no,
+            times=1,
+            sequence=score
+        )
         new_record.save()
     else:
         if record[0].times == 3:
             seq = []
+
             seq_value = record[0].sequence
             seq = to_bin(seq_value)
-            words = list(familiarity.objects.filter(res_id=user_id,word=_ques_ans))
+            words = list(familiarity.objects.filter(res_id=_user_no, word=_ques_ans))
             BKT_score = words[0].score
             BKT_score = BKT_score / 100
 
-            BKT_Pi = [BKT_score,1-BKT_score]
-            hmm = HMM(BKT_A,BKT_B,BKT_Pi)
+            BKT_Pi = [BKT_score, 1 - BKT_score]
+            ##print(BKT_Pi)
+            ##print(BKT_A)
+            ##print(BKT_B)
+            hmm = _hmm.HMM(BKT_A, BKT_B, BKT_Pi)
 
-            words[0].score = int(BKT_hmm.baum_welch(seq) * 100)
+            return_score = hmm.baum_welch(seq)
+            words[0].score = int(return_score[0] * 100)
+            words[0].save()
 
-            record[0].sequence = 0
-            record[0].times = 0
+            record[0].sequence = score
+            record[0].times = 1
+            record[0].save()
         else:
             record[0].sequence = record[0].sequence * 2 + score
             record[0].times = record[0].times + 1
+            record[0].save()
 
 
-#做对了才会有下一道
-#序列中的1指定的是上一道题
+# 做对了才会有下一道
+# 序列中的1指定的是上一道题
 # 获取指定id的套题的题目的下一道题
 @csrf_exempt
 def get_nextToDo(request):
@@ -137,7 +148,6 @@ def get_nextToDo(request):
     global last_question_ans
 
     user_id = request.POST.get("user_id", None)
-
 
     setid = request.POST.get("setid", None)
     arrid = request.POST.get("arrid", None)
@@ -162,23 +172,22 @@ def get_nextToDo(request):
         length = len(ques_list)
         for ques_id in ques_list:
             ques = Ques.objects.get(id=ques_id)
-            questions.append(ques)    ##questions是全局变量
-
+            questions.append(ques)  ##questions是全局变量
 
     if last_question_id != -1:
         last_question_id = questions[int(current_ques_id) - 1].id
         last_question_ans = questions[int(current_ques_id) - 1].question
         current_ques_id = questions[int(current_ques_id) - 1].id  # 得到绝对问题id
-    else:
+        check_record(user_id, last_question_id, last_question_ans, 1)
+    else:    ##第一次调用获得第一道题
         current_ques_id = questions[int(current_ques_id) - 1].id  # 得到绝对问题id
         last_question_id = current_ques_id
         last_question_ans = questions[int(current_ques_id) - 1].question
 
+    # 现在假定这里的就是绝对id(数据库里面每一项自带一个id,现在说的就是那个)
+    # 也假定现在的user_id同上
+    # 这里重新写一个函数,对数据库操作
 
-    #现在假定这里的就是绝对id(数据库里面每一项自带一个id,现在说的就是那个)
-    #也假定现在的user_id同上    
-    #这里重新写一个函数,对数据库操作	
-    check_record(user_id,last_question_id,last_question_ans,1)
 
     # print('get next to do......next')
     if number < length:

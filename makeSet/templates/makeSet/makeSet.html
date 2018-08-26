@@ -32,8 +32,8 @@
                     <form action="">
                         <table border="1" width="80%">
                             <tr align="center" style="font-size: 18px">
-                                <td id="td0" width="80%"> 题目 </td>
-                                <td id="td00" width="80%"> 选择 </td>
+                                <td id="td0" width="80%"> 题目</td>
+                                <td id="td00" width="80%"> 选择</td>
                             </tr>
                             <tr align="center" style="font-size: 18px">
                                 <td id="td1" width="80%"> Loading..</td>
@@ -189,7 +189,7 @@
                 vi.type = "hidden";
             }
             else {
-                td.innerText = "问题:" + all_ques["ques" + (startNum + i)] + "   " + "A:" + all_ques["DesA" + (startNum + i)]
+                td.innerText = "问题" + all_ques["id" + (startNum + i)] + ":" + all_ques["ques" + (startNum + i)] + "   " + "A:" + all_ques["DesA" + (startNum + i)]
                     + " B:" + all_ques["DesB" + (startNum + i)] + " C:" + all_ques["DesC" + (startNum + i)]
                     + " D:" + all_ques["DesD" + (startNum + i)];
                 var vi = document.getElementById('v' + (i + 1));
@@ -259,7 +259,6 @@
         }
 
     }
-
 
 
 </script>

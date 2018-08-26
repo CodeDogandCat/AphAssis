@@ -81,7 +81,7 @@ def error_answer(request):
 
 
 def to_bin(seq_value):
-    seq_value=int(seq_value)
+    seq_value = int(seq_value)
     seq = []
     for i in range(0, 3):
         seq.append(seq_value % 2)
@@ -179,15 +179,16 @@ def get_nextToDo(request):
         last_question_ans = questions[int(current_ques_id) - 1].question
         current_ques_id = questions[int(current_ques_id) - 1].id  # 得到绝对问题id
         check_record(user_id, last_question_id, last_question_ans, 1)
-    else:    ##第一次调用获得第一道题
+    else:  ##第一次调用获得第一道题
+        tmp = current_ques_id
+        print("$$$$$$$$" + str(tmp))
         current_ques_id = questions[int(current_ques_id) - 1].id  # 得到绝对问题id
         last_question_id = current_ques_id
-        last_question_ans = questions[int(current_ques_id) - 1].question
+        last_question_ans = questions[int(tmp) - 1].question
 
     # 现在假定这里的就是绝对id(数据库里面每一项自带一个id,现在说的就是那个)
     # 也假定现在的user_id同上
     # 这里重新写一个函数,对数据库操作
-
 
     # print('get next to do......next')
     if number < length:

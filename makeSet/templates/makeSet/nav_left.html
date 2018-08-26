@@ -40,7 +40,7 @@
             {#                //医生可见#}
             {% if classid == 1 %}
                 <li>
-                    <a class="active-menu" href="/index/"><i class="fa fa-dashboard "></i>菜单</a>
+                    <a class="active-menu" href="/index/"><i class="fa fa-xing "></i>菜单</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-desktop "></i>出题 <span class="fa arrow"></span></a>
@@ -89,22 +89,38 @@
                 </li>
                 {#                    患者可见#}
             {% elif classid == 0 %}
+                {#                <li>#}
+                {#                    <a href="#"><i class="fa fa-desktop "></i>查询 <span class="fa arrow"></span></a>#}
+                {#                    <ul class="nav nav-second-level">#}
+                {#                        <li>#}
+                {#                            <a href="/view_allMyDoneSet/"><i class="fa fa-plus"></i>已完成套题</a>#}
+                {#                        </li>#}
+                {#                        <li>#}
+                {#                            <a href="/view_allMyDoneSet/"><i class="fa fa-comments-o"></i>可视化分析</a>#}
+                {#                        </li>#}
+                {#                    </ul>#}
+                {#                </li>#}
+                {#                <li>#}
+                {#                    <a href="#"><i class="fa fa-desktop "></i>做题 <span class="fa arrow"></span></a>#}
+                {#                    <ul class="nav nav-second-level">#}
+                {#                        <li>#}
+                {#                            <a href="/view_allMyToDoSet/"><i class="fa fa-plus"></i>未做套题</a>#}
+                {#                        </li>#}
+                {#                    </ul>#}
+                {#                </li>#}
                 <li>
-                    <a href="#"><i class="fa fa-desktop "></i>查询 <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-exclamation "></i>查询 <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/view_allMyDoneSet/"><i class="fa fa-plus"></i>已完成套题</a>
+                            <a href="/view_allMyDoneSet/"><i class="fa fa-spinner"></i>已完成套题</a>
                         </li>
-                        {#                        <li>#}
-                        {#                            <a href="/view_allMyDoneSet/"><i class="fa fa-comments-o"></i>可视化分析</a>#}
-                        {#                        </li>#}
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-desktop "></i>做题 <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/view_allMyToDoSet/"><i class="fa fa-plus"></i>未做套题</a>
+                            <a href="/view_allMyToDoSet/"><i class="fa fa-pencil-square"></i>未做套题</a>
                         </li>
                     </ul>
                 </li>

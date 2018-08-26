@@ -17,6 +17,17 @@
     <link href="../static/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <style>
+        #leftpart {
+            float: left;
+            width: 300px;
+        }
+
+        #rightpart {
+            float: left;
+            margin-left: 60px;
+        }
+    </style>
 
 </head>
 <body>
@@ -28,44 +39,47 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-10">
-                    <h3 class="page-head-line">请按照语音提示选择图片</h3>
-                    <p>
+                    <div id="leftpart">
+                        <h3>请按照语音提示选择图片</h3>
                         <audio id="play" src="" controls='controls'></audio>
-                    </p>
-                    <p>
                         <audio id="play1" src=""></audio>
-                    </p>
-                    {#表情识别#}
-                    <video id="video" width="200" height="200" autoplay></video>
-                    <canvas style="display: none" id="canvas" width="640" height="480"></canvas>
+                    </div>
+                    <div id="rightpart">
+                        <video id="video" width="300" height="150" autoplay></video>
+                    </div>
+                    <canvas style="display: none" id="canvas" width="480" height="480"></canvas>
                     {#表情识别#}
                 </div>
             </div>
             <!-- /. ROW  -->
             <div id="port-folio">
-                <div class="row ">
-                    <div class="row " style="padding-top: 30px;">
-                        <div class="col-md-5 ">
-                            <div class="portfolio-item awesome mix_all" data-cat="awesome">
-                                <img id="img1" src="" class="img-responsive " alt=""/>
+                <div class="row " style="text-align:center;">
+                    <div class="row " style="padding-left: 60px">
+                        <div class="col-md-4 ">
+                            <div class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 280px;height: 280px">
+                                <img id="img1" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
-                        <div class="col-md-5 ">
-                            <div class="portfolio-item landscape mix_all" data-cat="landscape">
-                                <img id="img2" src="" class="img-responsive " alt=""/>
+                        <div class="col-md-4 " style="padding-left: 20px">
+                            <div class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 280px;height: 280px">
+                                <img id="img2" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row " style="padding-top: 50px;">
-                        <div class="col-md-5 ">
-                            <div class="portfolio-item nature mix_all" data-cat="nature">
-                                <img id="img3" src="" class="img-responsive " alt=""/>
+                    <div class="row " style="padding-top: 20px;padding-left: 60px">
+                        <div class="col-md-4 ">
+                            <div class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 280px;height: 280px">
+                                <img id="img3" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
-                        <div class="col-md-5 ">
-                            <div class="portfolio-item nature mix_all" data-cat="nature">
-                                <img id="img4" src="" class="img-responsive " alt=""/>
+                        <div class="col-md-4 ">
+                            <div class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 280px;height: 280px">
+                                <img id="img4" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
                     </div>
@@ -341,7 +355,7 @@
     {#        url: "http://127.0.0.1:8000/upload_snap/",#}
     {#        data: {"snap_base64": snap_base64},#}
     {#        success: function (data) {#}
-                {#alert("Success ! 结果为".concat(data.face_reg_test));#}
+    {#alert("Success ! 结果为".concat(data.face_reg_test));#}
     {#            var emotions = document.getElementById('emotions');#}
     {#            var res = data.face_reg_test;#}
     {#            var show_emotion = "loading..";#}
@@ -357,40 +371,40 @@
     {#            console.log("Success ! 结果为".concat(data.face_reg))#}
     {#        },#}
     {#        error: function (data) {#}
-                {#alert("Some error!");#}
+    {#alert("Some error!");#}
     {#        }#}
     {#    });#}
     {#}#}
 
-    function get_feeling(snap_base64) {
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "http://127.0.0.1:8000/get_feeling/",
-            data: {"snap_base64": snap_base64},
-            success: function (data) {
-                var emotions = document.getElementById('emotions');
-                var res = data.feeling;
-                var show_emotion = "loading..";
-                if (res == 0) {
-                    show_emotion = "表情为：平常"
-                } else if (res == 1) {
-                    show_emotion = "表情为：高兴"
-                } else {
-                    show_emotion = "表情为：不高兴"
+        function get_feeling(snap_base64) {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "http://127.0.0.1:8000/get_feeling/",
+                data: {"snap_base64": snap_base64},
+                success: function (data) {
+                    var emotions = document.getElementById('emotions');
+                    var res = data.feeling;
+                    var show_emotion = "loading..";
+                    if (res == 0) {
+                        show_emotion = "表情为：平常"
+                    } else if (res == 1) {
+                        show_emotion = "表情为：高兴"
+                    } else {
+                        show_emotion = "表情为：不高兴"
+                    }
+
+
+                    emotions.innerText = show_emotion;
+                    {#alert("Success ! 历史结果为".concat(data.feeling.toString()));#}
+                    console.log("Success ! 历史结果为".concat(data.feeling.toString()))
+
+                },
+                error: function (data) {
+                    {#alert("Some error!");#}
                 }
-
-
-                emotions.innerText = show_emotion;
-                {#alert("Success ! 历史结果为".concat(data.feeling.toString()));#}
-                console.log("Success ! 历史结果为".concat(data.feeling.toString()))
-
-            },
-            error: function (data) {
-                {#alert("Some error!");#}
-            }
-        });
-    }
+            });
+        }
 
     {#表情识别#}
 </script>

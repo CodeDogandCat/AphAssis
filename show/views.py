@@ -94,7 +94,10 @@ def get_patient_account(request):
     age = "" if patient.age is None else patient.age
     profession = "" if patient.profession is None else patient.profession
     education = "" if patient.education is None else patient.education
-    training_start_period = "" if patient.training_start_period is None else patient.training_start_period
+    training_start_period = "" if patient.training_start_period is None else patient.training_start_period.strftime(
+        '%Y-%m-%d')
+    print("##########")
+    print(type(training_start_period))
     severe = "" if patient.severe is None else patient.severe
     comorbidity_disease = "" if patient.comorbidity_disease is None else patient.comorbidity_disease
     primary_disease = "" if patient.primary_disease is None else patient.primary_disease
@@ -123,4 +126,41 @@ def get_patient_account(request):
 
 
 def save_patient_account(request):
-    pass
+    if request.method == 'POST':
+        res_username = request.POST.get('res_username', None)
+        res_password = request.POST.get('res_password', None)
+        res_email = request.POST.get('res_email', None)
+        age = request.POST.get('age', None)
+        profession = request.POST.get('profession', None)
+        education = request.POST.get('education', None)
+        training_start_period = request.POST.get('training_start_period', None)
+        severe = request.POST.get('severe', None)
+        comorbidity_disease = request.POST.get('comorbidity_disease', None)
+        primary_disease = request.POST.get('primary_disease', None)
+        type_of_aphasia = request.POST.get('type_of_aphasia', None)
+        personality = request.POST.get('personality', None)
+        intelligence = request.POST.get('intelligence', None)
+        language_background = request.POST.get('language_background', None)
+        self_correcting_ability = request.POST.get('self_correcting_ability', None)
+        patient = register.objects.get(res_username=res_username)
+        if patient.res_password != res_password:
+            patient.res_password = res_password
+        patient.res_username = res_username
+        patient.res_email = res_email
+        patient.res_id = 0
+        patient.age = age
+        patient.profession = profession
+        patient.education = education
+        patient.training_start_period = training_start_period
+        patient.severe = severe
+        patient.comorbidity_disease = comorbidity_disease
+        patient.primary_disease = primary_disease
+        patient.type_of_aphasia = type_of_aphasia
+        patient.personality = personality
+        patient.intelligence = intelligence
+        patient.language_background = language_background
+        patient.self_correcting_ability = self_correcting_ability
+
+        patient.save()
+        resp = {'status': 'success', 'reason': '保存成功'}
+        return HttpResponse(json.dumps(resp), content_type="application/json")

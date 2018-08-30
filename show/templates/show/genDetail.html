@@ -24,8 +24,7 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
-       		<button id="button" onclick="toChart()"> 套题总览 </button>
-            <button id="button1" onclick="toWord()"> 熟悉情况 </button>
+       		<button id="button" onclick="location.href='/gen_chart?id={{ genid }}'"> 套题总览 </button>
 
             <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
                 <table align="center" width="80%" border=2 bordercolor="#00ff99">
@@ -95,13 +94,6 @@
 <script src="../static/js/galleryCustom.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
-	function toChart(){
-		location.href = "/chart/";
-	}
-
-    function toWord(){
-        location.href = "/word_fam/";
-    }
     function confirmAct() {
         var msg = "您真的确定要退出吗？\n\n请确认！";
         if (confirm(msg) == true) {

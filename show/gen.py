@@ -3,16 +3,48 @@ import os
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 reference = os.path.join(THIS_FOLDER,'reference.py')
 
+from login.models import familiarity
+
 exec(open(reference).read())
+
+all_sets = []
+data_to_chart = []
 
 
 def gen_chart(request):
+    global data_to_chart
     username = request.session['username']
     classid = request.session['classid']
+
     return render(request, 'show/genChart.html', {'username': username, 'classid': classid})
+
+def get_chart_data(request):
+    global data_to_chart
+
+    sets_name = ''
+    wrong_count = ''
+    score = ''
+    time = ''
+    if len(data_to_chart) > 0:
+        for item in data_to_chart:  
+            sets_name = sets_name +  item['name'] + ','
+            wrong_count = wrong_count + str(item['count']) + ','
+            score = score + str(item['count']/item['number']) + ','
+            time = time + str(item['time']) + ','
+
+    return JsonResponse({
+						'name' : sets_name,
+						'wrong' : wrong_count,
+						'scores' : score,
+						'times' : time
+		})
 
 # 显示患者的详细信息
 def gen_detail(request):
+    global data_to_chart
+
+    data_to_chart.clear()
+
     need_gen_str = request.GET.get('id')
     need_gen_no = int(need_gen_str)
     all_sets = QuestionSet.objects.all()
@@ -24,16 +56,19 @@ def gen_detail(request):
     # 下面是患者在每套题的情况
     for item in sets:
         temp = {}
+        d_chart = {}
         if item.status == 0:
             temp['status'] = '未完成'
             temp["time"] = '--'
             temp["wrong"] = '--'
             temp["fintime"] = '--'
         else:
+            d_chart['time'] = item.usedTime
             temp['status'] = '已完成'
             temp["time"] = str(item.usedTime) + '秒'
 
             #解析错题记录
+            count = 0
             w_list = str(item.wrong_ques).split(',')
             w_str = ''
             for wrong_pair in w_list:
@@ -41,6 +76,8 @@ def gen_detail(request):
                 wrong_ques_id = ls[0]
                 #wrong_log = ls[1]  
                 w_str += str(wrong_ques_id) + ','
+                count = count + 1
+
             if w_str.endswith(','):
                 w_str = w_str[0:len(w_str) - 1]
             if len(w_str) > 10:
@@ -49,10 +86,17 @@ def gen_detail(request):
             temp["wrong"] = w_str
             temp['fintime'] = item.finTime.strftime("%Y/%m/%d %H:%M:%S")
 
-        # print(len(all_sets.filter(setId=item.set)))
+            all_ques = all_sets.filter(id=item.set)[0].questions
+
+            d_chart['number'] = len(all_ques.split(','))
+            d_chart['count'] = count
+            d_chart['name'] = all_sets.filter(id=item.set)[0].setDes
+            data_to_chart.append(d_chart)
+
         temp["name"] = all_sets.filter(id=item.set)[0].setDes
         temp["arrtime"] = item.arrTime.strftime("%Y/%m/%d %H:%M:%S")
         detail.append(temp)
+        
 
     print("show gen detail len: "+str(len(detail)))
     current_page = request.GET.get('p')
@@ -136,27 +180,47 @@ def get_allGen(request):
 
 
 def word_fam(request):
-    '''
-    ques_list = list(Ques.objects.all())
-    gens = list(register.objects.filter(res_id=0)) 
-    word_list = set()
-    gen_list = set()
-    for user in gens:
-        gen_list.add(user.res_username)
-
-    for item in ques_list:
-        if item.DesA not in word_list:
-            word_list.add(item.DesA)
-        if item.DesB not in word_list:
-            word_list.add(item.DesB)
-        if item.DesC not in word_list:
-            word_list.add(item.DesC)
-        if item.DesD not in word_list:
-            word_list.add(item.DesD)
-    '''
+    
     username = request.session['username']
     classid = request.session['classid']
-    #word_list = list(word_list)
-    #gen_list = list(gen_list)
     
     return render(request,'show/word_fam.html',{'username':username,'classid':classid})
+
+
+def get_fam_data(request):
+    all_user = list(register.objects.all())
+
+    gen_list = set()
+    all_fam_data = list(familiarity.objects.all())  #所有分数
+    
+    all_scores = {}  ##每个用户
+
+    for user in all_user:
+        s_score = list(familiarity.objects.filter(res_id=user.id))  #这个用户对应的所有的分数
+        s_word = {}   ##每个用户对应的词的分数
+        for item in s_score:
+            s_word[item.word] = item.score
+
+        if len(s_word) > 0:
+            all_scores[user.res_username] = s_word
+
+    '''
+    all_fam = ''
+    all_user = ''
+    all_word = ''
+    for user,words in all_scores.items():
+        all_user = all_user
+
+    for user in gen_list:
+        all_user = all_user + user.res_username + ','
+        for word in word_list:
+            p_score = familiarity.objects.filter(res_id=user.id,word=word)
+            all_fam = all_fam + str(p_score[0].score) + ','
+	
+    return JsonResponse({
+            'users' : all_user,
+            'words' : all_word,
+            'scores' : all_fam
+        })
+	'''
+    return JsonResponse(all_scores)

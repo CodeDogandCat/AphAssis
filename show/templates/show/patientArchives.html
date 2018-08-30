@@ -19,7 +19,17 @@
     <link href="../static/css/custom.css" rel="stylesheet"/>
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <style>
+        #col-one {
+            float: left;
+            width: 200px;
+        }
 
+        #col-two {
+            float: left;
+            margin-left: 120px;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -27,108 +37,132 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
-            <div class="row">
+            <div>
                 <fieldset style="position:absolute;left:27%;top:17%;width:75%;height:75%">
                     <legend style="font-size: 25px">档案设置</legend>
 
-                    <form role="form" style="width: fit-content">
-                        <p>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="用户名" id="res_username"
-                                   value="{{ res_username }}"/>
+                    <form role="form" style="width: fit-content;height: 100%">
+                        <div id="col-one">
+                            <div class="form-group input-group" style="width:300px">
+                                <label>患者姓名</label>
+                                <input type="text" readonly class="form-control" placeholder="患者姓名" id="res_username"
+                                       value="{{ res_username }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>密码</label>
+                                <input type="password" class="form-control" placeholder="密码" id="res_password"
+                                       value="{{ res_password }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>确认密码</label>
+                                <input type="password" class="form-control" placeholder="确认密码" id="res_rpassword"
+                                       value="{{ res_password }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>邮箱</label>
+                                <input type="text" class="form-control" placeholder="邮箱" id="res_email"
+                                       value="{{ res_email }}"/>
+                            </div>
+                            <div class=" form-group input-group" style="width:300px">
+                                <label>年龄</label>
+                                <input type="text" class="form-control" placeholder="年龄" id="age"
+                                       value="{{ age }}"/>
+                            </div>
+                            <div class=" form-group input-group" style="width:300px">
+                                <label>训练开始期</label>
+                                <input type="text" class="form-control" placeholder="训练开始期"
+                                       id="training_start_period" value="{{ training_start_period }}"/>
+                            </div>
+                            <div class=" form-group input-group" style="width:300px">
+                                <label>严重程度</label>
+                                <select class="form-control" id="severe" value="{{ severe }}">
+                                    <option value="0">0级</option>
+                                    <option value="1">1级</option>
+                                    <option value="2">2级</option>
+                                    <option value="3">3级</option>
+                                    <option value="4">4级</option>
+                                    <option value="5">5级</option>
+                                </select>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>并发症</label>
+                                <input type="text" class="form-control" placeholder="并发症"
+                                       id="comorbidity_disease" value="{{ comorbidity_disease }}"/>
+                            </div>
                         </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" readonly class="form-control" placeholder="密码" id="res_password"
-                                   value="{{ res_password }}"/>
+                        <div id="col-two">
+                            <div class="form-group input-group" style="width:300px">
+                                <label>原发疾病</label>
+                                <input type="text" class="form-control" placeholder="原发疾病" id="primary_disease"
+                                       value="{{ primary_disease }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>失语症类型</label>
+                                {#                                <input type="text" class="form-control" placeholder="失语症类型" id="type_of_aphasia"#}
+                                {#                                       value="{{ type_of_aphasia }}"/>#}
+                                <select class="form-control" id="type_of_aphasia" value="{{ type_of_aphasia }}">
+                                    <option value="0">运动性失语</option>
+                                    <option value="1">感觉性失语</option>
+                                    <option value="2">传导性失语</option>
+                                    <option value="3">完全性失语</option>
+                                    <option value="4">命名性失语</option>
+                                    <option value="5">丘脑性失语</option>
+                                    <option value="6">混合性失语</option>
+                                </select>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>性格</label>
+                                <input type="text" class="form-control" placeholder="性格" id="personality"
+                                       value="{{ personality }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>智力</label>
+                                <input type="text" class="form-control" placeholder="智力" id="intelligence"
+                                       value="{{ intelligence }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>语言背景</label>
+                                <input type="text" class="form-control" placeholder="语言背景"
+                                       id="language_background" value="{{ language_background }}"/>
+                            </div>
+                            <div class="form-group input-group" style="width:300px">
+                                <label>自纠能力</label>
+                                <input type="text" class="form-control" placeholder="自纠能力"
+                                       id="self_correcting_ability" value="{{ self_correcting_ability }}"/>
+                            </div>
+                            <div class="form-group" style="width:300px">
+                                <label>职业</label>
+                                <select class="form-control" id="profession" value="{{ profession }}">
+                                    <option value="农民">农民</option>
+                                    <option value="工人">工人</option>
+                                    <option value="技工">技工</option>
+                                    <option value="商业服务业人员">商业服务业人员</option>
+                                    <option value="文职工作者">文职工作者</option>
+                                    <option value="军人">军人</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width:300px">
+                                <label>学历</label>
+                                <select class="form-control" id="education" value="{{ education }}">
+                                    <option value="0">小学</option>
+                                    <option value="1">初中</option>
+                                    <option value="2">高中</option>
+                                    <option value="3">本科</option>
+                                    <option value="4">专科</option>
+                                    <option value="5">硕士</option>
+                                    <option value="6">博士</option>
+                                </select>
+                            </div>
+
                         </div>
-                        </p>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" readonly class="form-control" placeholder="确认密码" id="res_rpassword"
-                                   value="{{ res_password }}"/>
+
+                        <div>
+
+                            <a class="btn btn-primary" style="alignment: center" onclick="save()">保存</a>
+
                         </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="text" class="form-control" placeholder="邮箱" id="res_email"
-                                   value="{{ res_email }}"/>
-                        </div>
-                        <div class=" form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="text" class="form-control" placeholder="年龄" id="age"
-                                   value="{{ age }}"/>
-                        </div>
-                        <div class=" form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-adjust"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="训练开始期"
-                                   id="training_start_period" value="{{ training_start_period }}"/>
-                        </div>
-                        <div class=" form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-ambulance"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="病情轻重" id="severe"
-                                   value="{{ severe }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-area-chart"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="合并症"
-                                   id="comorbidity_disease" value="{{ comorbidity_disease }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-angle-up"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="原发疾病" id="primary_disease"
-                                   value="{{ primary_disease }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="失语症类型" id="type_of_aphasia"
-                                   value="{{ type_of_aphasia }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-automobile"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="性格" id="personality"
-                                   value="{{ personality }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="智力" id="intelligence"
-                                   value="{{ intelligence }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-bell"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="语言背景"
-                                   id="language_background" value="{{ language_background }}"/>
-                        </div>
-                        <div class="form-group input-group" style="width:400px">
-                            <span class="input-group-addon"><i class="fa fa-chain"></i></span>
-                            <input type="text" readonly class="form-control" placeholder="自纠能力"
-                                   id="self_correcting_ability" value="{{ self_correcting_ability }}"/>
-                        </div>
-                        <div class="form-group" style="width:400px">
-                            <label>职业</label>
-                            <select class="form-control" id="profession" value="{{ profession }}">
-                                <option value="农民">农民</option>
-                                <option value="工人">工人</option>
-                                <option value="技工">技工</option>
-                                <option value="商业服务业人员">商业服务业人员</option>
-                                <option value="文职工作者">文职工作者</option>
-                                <option value="军人">军人</option>
-                                <option value="其他">其他</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="width:400px">
-                            <label>学历</label>
-                            <select class="form-control" id="education" value="{{ education }}">
-                                <option value="0">小学</option>
-                                <option value="1">初中</option>
-                                <option value="2">高中</option>
-                                <option value="3">本科</option>
-                                <option value="4">专科</option>
-                                <option value="5">硕士</option>
-                                <option value="6">博士</option>
-                            </select>
-                        </div>
-                        <a class="btn btn-primary" onclick="save()">保存</a>
+
                     </form>
                 </fieldset>
             </div>
@@ -163,7 +197,53 @@
 <!-- METISMENU SCRIPTS -->
 <script src="../../../static/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
+<script src="../../../static/js/laydate/laydate.js"></script>
 <script>
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#training_start_period' //指定元素
+    });
+</script>
+<script>
+    var edu ={{ education }};
+    if (edu !=
+        ""
+    ) {
+        document.getElementById("education")[edu].selected = true;
+
+    }
+    var severe ={{ severe }};
+    if (severe !=
+        ""
+    ) {
+        document.getElementById("severe")[severe].selected = true;
+
+    }
+    var type_of_aphasia ={{ type_of_aphasia }};
+    if (type_of_aphasia !=
+        ""
+    ) {
+        document.getElementById("type_of_aphasia")[type_of_aphasia].selected = true;
+
+    }
+    var pro = '{{ profession }}';
+    if (pro !=
+        ""
+    ) {
+        var m = new Map();
+        m.set("农民", 0);
+        m.set("工人", 1);
+        m.set("技工", 2);
+        m.set("商业服务业人员", 3);
+        m.set("文职工作者", 4);
+        m.set("军人", 5);
+        m.set("其他", 6);
+
+        document.getElementById("profession")[m.get(pro)].selected = true;
+    }
+
+    var old_password = '{{ res_password }}';
+
     function confirmAct() {
         var msg = "您真的确定要退出吗？\n\n请确认！";
         if (confirm(msg) == true) {
@@ -178,17 +258,65 @@
         var res_email = $('#res_email').val();
 
         var res_username = $('#res_username').val();
-        var res_password = hex_md5($('#res_password').val());
-        var res_rpassword = hex_md5($('#res_rpassword').val());
+        var res_password = '{{ res_password }}';
+        var res_rpassword = res_password;
+        if ($('#res_password').val() != res_password) {
+            res_password = hex_md5($('#res_password').val());
+            res_rpassword = hex_md5($('#res_rpassword').val());
+        }
         var res_type = $('#type option:selected').val();
         var age = $('#age').val();
         var profession = $('#profession').val();
         var education = $('#education option:selected').val();
         var re = /[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,5}\.[a-zA-Z0-9]{1,5}/;
         var re1 = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;
-
+        var training_start_period = $('#training_start_period').val();
+        var severe = $('#severe option:selected').val();
+        var comorbidity_disease = $('#comorbidity_disease').val();
+        var primary_disease = $('#primary_disease').val();
+        var personality = $('#personality').val();
+        var intelligence = $('#intelligence').val();
+        var language_background = $('#language_background').val();
+        var type_of_aphasia = $('#type_of_aphasia option:selected').val();
+        var self_correcting_ability = $('#self_correcting_ability').val();
         if (res_username == "") {
             alert("用户名不能为空");
+            return 0;
+        }
+        if (primary_disease == "") {
+            alert("原发病不能为空");
+            return 0;
+        }
+        if (training_start_period == "") {
+            alert("训练开始日期不能为空");
+            return 0;
+        }
+        if (severe == "") {
+            alert("病情严重程度不能为空");
+            return 0;
+        }
+        if (comorbidity_disease == "") {
+            alert("并发症不能为空");
+            return 0;
+        }
+        if (personality == "") {
+            alert("患者性格不能为空");
+            return 0;
+        }
+        if (intelligence == "") {
+            alert("患者智力水平不能为空");
+            return 0;
+        }
+        if (language_background == "") {
+            alert("语言背景不能为空");
+            return 0;
+        }
+        if (type_of_aphasia == "") {
+            alert("失语症类型不能为空");
+            return 0;
+        }
+        if (self_correcting_ability == "") {
+            alert("自纠能力不能为空");
             return 0;
         }
         if (res_password.length < 6) {
@@ -196,6 +324,7 @@
             return 0;
         } else {
             if (res_password != res_rpassword) {
+
                 alert("两次输入的密码不同");
                 return 0;
             }
@@ -213,15 +342,29 @@
             dataType: "json",
             url: "http://127.0.0.1:8000/save_patient_account/",
             data: {
-                'res_email': res_email, 'res_username': res_username, 'res_password': res_password,
-                'res_type': res_type, 'age': age, 'profession': profession, 'education': education
+                'res_email': res_email,
+                'res_username': res_username,
+                'res_password': res_password,
+                'res_type': res_type,
+                'age': age,
+                'profession': profession,
+                'education': education,
+                'training_start_period': training_start_period,
+                "severe": severe,
+                "comorbidity_disease": comorbidity_disease,
+                "personality": personality,
+                "intelligence": intelligence,
+                'language_background': language_background,
+                'type_of_aphasia': type_of_aphasia,
+                'self_correcting_ability': self_correcting_ability,
+                'primary_disease': primary_disease
             },
             success: function success(data) {
                 if (data.status == "failed")
                     alert(data.reason);
                 if (data.status == "success") {
                     alert(data.reason);
-                    location.href = '/login/';
+                    location.href = '/allGen/';
                 }
             },
             error: function error() {

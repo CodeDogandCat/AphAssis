@@ -182,6 +182,8 @@ def get_nextToDo(request):
     else:    ##第一次调用获得第一道题
         current_ques_id = questions[int(current_ques_id) - 1].id  # 得到绝对问题id
         last_question_id = current_ques_id
+        print("show_id:" + str(current_ques_id))
+        print("show len:" + str(len(questions)))
         last_question_ans = questions[int(current_ques_id) - 1].question
 
     # 现在假定这里的就是绝对id(数据库里面每一项自带一个id,现在说的就是那个)

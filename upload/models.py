@@ -28,3 +28,5 @@ class guide(models.Model):
 	def __unicode__(self):
 		return self.right_answer + self.wrong_answer
 
+class allWord(models.Model):
+	word = models.CharField(max_length=30,null=True)

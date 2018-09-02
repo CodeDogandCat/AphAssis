@@ -8,6 +8,8 @@ from django.shortcuts import render
 
 from login.models import register
 from upload.models import guide
+from upload.models import allWord
+from login.models import familiarity
 
 user_id = -1
 Login_user = ''
@@ -70,6 +72,17 @@ def nregister(request):
                 education=education
             )
             new_register.save()
+            #print('new _register id')
+            #print(new_register.id)
+            all_words = list(allWord.objects.all())
+            for item in all_words:
+                new_fam = familiarity(
+                        res_id = new_register.id,
+                        word = item.word,
+                        score = 50
+                    )
+                new_fam.save()
+
             resp = {'status': 'success', 'reason': '注册成功'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
     return render(request, 'login/register.html')

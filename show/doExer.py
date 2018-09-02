@@ -110,6 +110,8 @@ def check_record(_user_no, _ques_no, _ques_ans, score):
 
             seq_value = record[0].sequence
             seq = to_bin(seq_value)
+            print('-------------')
+            print(_user_no,_ques_ans)
             words = list(familiarity.objects.filter(res_id=_user_no, word=_ques_ans))
             BKT_score = words[0].score
             BKT_score = BKT_score / 100
@@ -154,6 +156,8 @@ def get_nextToDo(request):
 
     # 协同过滤需要保存的参数
     current_ques_id = request.POST.get('cur_ques_id', None)
+    realitive_ques_id = current_ques_id
+
     if int(current_ques_id) == -1:
         current_ques_id = 1
     print("current_question_id: " + str(current_ques_id))
@@ -166,7 +170,7 @@ def get_nextToDo(request):
     typeid = request.POST.get("type", None)  # type==0  初始化
 
     if int(typeid) == 0:
-        # print('get next to do......init ')
+        print('get next to do......init ')
         ques_set = QuestionSet.objects.get(id=setid)
         ques_list = ques_set.questions.split(',')
         length = len(ques_list)
@@ -187,7 +191,8 @@ def get_nextToDo(request):
         
         print("show_id:" + str(current_ques_id))
         print("show len:" + str(len(questions)))
-        last_question_ans = questions[int(current_ques_id) - 1].question
+        print("curr_ques_id:",int(current_ques_id))
+        last_question_ans = questions[int(realitive_ques_id) - 1].question
 
     # 现在假定这里的就是绝对id(数据库里面每一项自带一个id,现在说的就是那个)
     # 也假定现在的user_id同上

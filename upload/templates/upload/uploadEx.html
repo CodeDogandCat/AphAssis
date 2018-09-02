@@ -20,128 +20,153 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
     <style>
-    		/*样式1*/
-    	.a-upload {
-			padding: 4px 10px;
-			height: 40px;
-			line-height: 20px;
-			position: relative;
-			cursor: pointer;
-			color: #888;
-			background: #fafafa;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			overflow: hidden;
-			display: inline-block;
-			*display: inline;
-			*zoom: 1
-		}
-		
-		.a-upload  input {
-			position: absolute;
-			font-size: 100px;
-			right: 0;
-			top: 0;
-			opacity: 0;
-			filter: alpha(opacity=0);
-			cursor: pointer
-		}
-		
-		.a-upload:hover {
-			color: #444;
-			background: #eee;
-			border-color: #ccc;
-			text-decoration: none
-		}
-		/*样式2*/
-		.file {
-			position: absolute;
-			display: inline-block;
-			background: #D0EEFF;
-			border: 1px solid #99D3F5;
-			border-radius: 4px;
-			padding: 4px 12px;
-			overflow: hidden;
-			color: #1E88C7;
-			text-decoration: none;
-			text-indent: 0;
-			line-height: 20px;
-		}
-		.file input {
-			position: absolute;
-			font-size: 100px;
-			right: 0;
-			top: 0;
-			opacity: 0;
-		}
-		.file:hover {
-			background: #AADFFD;
-			border-color: #78C3F3;
-			color: #004974;
-			text-decoration: none;
-		}		
+        /*样式1*/
+        .a-upload {
+            padding: 4px 10px;
+            height: 40px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+
+        /*样式2*/
+        .file {
+            position: absolute;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
     </style>
 
 </head>
 <body>
 <div id="wrapper">
-   {% include 'nav_left.html' %}
+    {% include 'nav_left.html' %}
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row">
                 <fieldset style="position:absolute;left:27%;top:18%;width:75%;height:90%">
                     <legend style="font-size: 25px">上传题目 (请注意物品名称保持一致)</legend>
-                    <form action='/upload/' method='post' enctype='multipart/form-data' style="position:absolute;left:1%">
+                    <form action='/upload/' method='post' enctype='multipart/form-data'
+                          style="position:absolute;left:1%">
                         {% csrf_token %}
                         <br/>
-                        <table border="0.5" width="60%">
+                        <table border="0.5" width="60%" align="center">
                             <tr>
-                                <p style="font-size: 18px"> 问题&nbsp &nbsp<input type="text" placeholder="想让患者选择什么物品" name="question"></p>
+                                <td width="60%"><p>问题<input type="text" placeholder="想让患者选择什么物品" name="question"></p></td>
+
                             </tr>
-                            <tr >
-                                <td width="40%" ><p class="bttn-float bttn-md bttn-success" > 图片一 <input type="file" name="imageA" id="UPA" onchange="viewmyPic(showImg,this.form.UPA);"></p></td>
-                               
+                            <tr>
+
                                 <td width="60%"><p> 物品一名称 <input type="text" name="desA"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片一 <input type="file"
+                                                                                                       name="imageA"
+                                                                                                       id="UPA"
+                                                                                                       onchange="viewmyPic(showImg,this.form.UPA);">
+                                </p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片二 <input type="file" name="imageB" id="UPB" onchange="viewmyPic(showImg1,this.form.UPB);"></p></td>
 
                                 <td width="60%"><p> 物品二名称<input type="text" name="desB"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片二 <input type="file"
+                                                                                                       name="imageB"
+                                                                                                       id="UPB"
+                                                                                                       onchange="viewmyPic(showImg1,this.form.UPB);">
+                                </p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片三 <input type="file" name="imageC" id="UPC" onchange="viewmyPic(showImg2,this.form.UPC);"></p></td>
-                                
+
                                 <td width="60%"><p> 物品三名称<input type="text" name="desC"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片三 <input type="file"
+                                                                                                       name="imageC"
+                                                                                                       id="UPC"
+                                                                                                       onchange="viewmyPic(showImg2,this.form.UPC);">
+                                </p></td>
                             </tr>
                             <tr>
-                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片四 <input type="file" name="imageD" id="UPD" onchange="viewmyPic(showImg3,this.form.UPD);"></p></td>
-                                
+
                                 <td width="60%"><p> 物品四名称 <input type="text" name="desD"></p></td>
+                                <td width="40%"><p class="bttn-float bttn-md bttn-success"> 图片四 <input type="file"
+                                                                                                       name="imageD"
+                                                                                                       id="UPD"
+                                                                                                       onchange="viewmyPic(showImg3,this.form.UPD);">
+                                </p></td>
                             </tr>
                             <tr>
                                 <p><input type="submit" value="提交"
-                                    style="position:absolute;left:35%;top:106%;width:13%;height:13%"></p>
+                                          style="position:absolute;left:35%;top:106%;width:13%;height:13%"></p>
                             </tr>
                         </table>
                     </form>
                 </fieldset>
-              
+
                 <table border="0.5" width="40%" style="position:absolute;left:70%;top:30%;width:40%;height:50%">
-                	<tr>
-                		<td><img name="showImg" id="showImg" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
-                		<td><img name="showImg1" id="showImg1" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
-                	</tr>            
-                	<tr>
-                		<td><img name="showImg2" id="showImg2" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
-                		<td><img name="showImg3" id="showImg3" src="" width="90px" height="90px" style="display:none;" alt="预览图片" /></td>
-                	</tr>            
+                    <tr>
+                        <td><img name="showImg" id="showImg" src="" width="90px" height="90px" style="display:none;"
+                                 alt="预览图片"/></td>
+                        <td><img name="showImg1" id="showImg1" src="" width="90px" height="90px" style="display:none;"
+                                 alt="预览图片"/></td>
+                    </tr>
+                    <tr>
+                        <td><img name="showImg2" id="showImg2" src="" width="90px" height="90px" style="display:none;"
+                                 alt="预览图片"/></td>
+                        <td><img name="showImg3" id="showImg3" src="" width="90px" height="90px" style="display:none;"
+                                 alt="预览图片"/></td>
+                    </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
-    <!-- /. PAGE INNER  -->
+<!-- /. PAGE INNER  -->
 <!-- /. WRAPPER  -->
 <!-- /. FOOTER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
@@ -160,22 +185,23 @@
 <script src="../static/js/galleryCustom.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
-function viewmyPic(mypic,upfile){
-	if(upfile.files && upfile.files[0]){
-		mypic.style.display = "";
-		//mypic.src = upfile.files[0].getAsDataURL();
-		mypic.src = window.URL.createObjectURL(upfile.files[0]);
-	}
-	else{
-		alert("B");
-		if(upfile.value){
-			mypic.src = upfile.value;
-			mypic.style.display = "";
-			mypic.border = 1;
-		}
-	}
-}
-</script>>
+    function viewmyPic(mypic, upfile) {
+        if (upfile.files && upfile.files[0]) {
+            mypic.style.display = "";
+            //mypic.src = upfile.files[0].getAsDataURL();
+            mypic.src = window.URL.createObjectURL(upfile.files[0]);
+        }
+        else {
+            alert("B");
+            if (upfile.value) {
+                mypic.src = upfile.value;
+                mypic.style.display = "";
+                mypic.border = 1;
+            }
+        }
+    }
+</script>
+>
 </body>
 </html>
 

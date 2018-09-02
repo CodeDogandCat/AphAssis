@@ -25,19 +25,19 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
-                <table align="center" width="80%" border=2 bordercolor="#00ff99" >
+                <table align="center" width="80%" border=1 bordercolor="#5e75a8" >
                     <tbody>
-                    <tr height="45px" style="font-size: 25px">
+                    <tr height="45px" style="font-size: 27px">
                         <td colspan="6" align="center">套题列表</td>
                     </tr>
-                    <tr style="font-size: 22px" align="center">
-                        <td width="10%">id</td>
+                    <tr style="font-size: 23px" align="center">
+                        <td width="10%">编号</td>
                         <td width="40%">套题描述</td>
                         <td width="20%">题目数量</td>
                         <td width="20%">操作</td>
                     </tr>
                     {% for row in posts.object_list %}
-                        <tr style="font-size: 20px" align="center">
+                        <tr style="font-size: 18px" align="center">
                             <td width="10%">{{ row.id }}</td>
                             <td width="40%">{{ row.setDes }}</td>
                             <td width="20%">{{ row.count }}</td>

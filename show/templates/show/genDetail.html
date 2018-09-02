@@ -27,18 +27,18 @@
        		<button id="button" onclick="location.href='/gen_chart?id={{ genid }}'"> 套题总览 </button>
 
             <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
-                <table align="center" width="80%" border=2 bordercolor="#00ff99">
+                <table align="center" width="85%" border=1 bordercolor="#5e75a8">
                     <tbody>
                     <tr height="35px">
-                        <td colspan="6" align="center" style="font-size: 24px">套题列表</td>
+                        <td colspan="6" align="center" style="font-size: 27px">套题列表</td>
                     </tr>
-                    <tr align="center" style="font-size: 18px">
+                    <tr align="center" style="font-size: 20px">
                         <td width="21%">套题描述</td>
                         <td width="13%">布置时间</td>
                         <td width="13%">是否完成</td>
                         <td width="13%">完成时间</td>
-                        <td width="10%">所花时间</td>
-                        <td width="30%">错题</td>
+                        <td width="15%">用时</td>
+                        <td width="25%">错题</td>
                     </tr>
                     {% for row in posts.object_list %}
                         <tr align="center" style="font-size: 16px">
@@ -46,8 +46,8 @@
                             <td width="10%">{{ row.arrtime }}</td>
                             <td width="10%">{{ row.status }}</td>
                             <td width="10%">{{ row.fintime }}</td>
-                            <td width="10%">{{ row.time }}</td>
-                            <td width="30%"><a href="">{{ row.wrong }}</a>
+                            <td width="15%">{{ row.time }}</td>
+                            <td width="25%"><a href="">{{ row.wrong }}</a>
                             </td>
                         </tr>
                     {% endfor %}

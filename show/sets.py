@@ -40,7 +40,7 @@ def setDisplay(request):
 
     current_page = request.GET.get('p')
     # Paginator对象，里面封装了上面那些值，把USER_LIST对象传过来了，显示10页
-    paginator = Paginator(setlist, 3)
+    paginator = Paginator(setlist, 8)
     try:
         # page对象
         # posts配置对象(current_page用户可能填些不合法的字段）
@@ -113,7 +113,7 @@ def set_detail(request):
 
             current_page = request.GET.get('p')
             # Paginator对象，里面封装了上面那些值，把USER_LIST对象传过来了，显示10页
-            paginator = Paginator(questions, 3)
+            paginator = Paginator(questions, 8)
             try:
                 # page对象
                 # posts配置对象(current_page用户可能填些不合法的字段）

@@ -48,7 +48,7 @@
                         <br/>
 
                         <div class="row" align="center">
-                            <button type="button" onclick="viewGuide()" style="position:absolute;left:60%"
+                            <button type="button" onclick="viewGuide()" style="position:absolute;left:67%"
                             >
                                 查询相关引导语
                             </button>
@@ -58,16 +58,18 @@
                     </form>
                     <br/>
                     <br/>
-                    <p style="font-size: 15px">以下是已存在的相关引导语</p>
-                    <table border="1" width="80%">
+                    <table border="1" width="80%" border=1 bordercolor="#5e75a8">
+                        <tr height="25px">
+                            <td colspan="6" align="center" style="font-size: 20px">已存在的相关引导语</td>
+                        </tr>
                         <tr align="center" style="font-size: 17px">
-                            <td width="5%">id</td>
+                            <td width="5%">编号</td>
                             <td width="15%">正确选项</td>
                             <td width="15%">患者选项</td>
                             <td width="60%">引导语</td>
-                            <td width="5%">勾选</td>
+                            <td width="5%">操作</td>
                         </tr>
-                        <tr>
+                        <tr style="font-size: 16px" align="center">
                             <td id="id1" width="5%">0</td>
                             <td id="tdright1" width="15%"> Loading..</td>
                             <td id="tdwrong1" width="15%"> Loading..</td>
@@ -76,7 +78,7 @@
                                 <input id="v1" align="center" type="checkbox" onclick="store(this,0)">
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="font-size: 16px" align="center">
                             <td id="id2" width="5%">0</td>
                             <td id="tdright2" width="15%"> Loading..</td>
                             <td id="tdwrong2" width="15%"> Loading..</td>
@@ -85,7 +87,7 @@
                                 <input id="v2" align="center" type="checkbox" onclick="store(this,1)">
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="font-size: 16px" align="center">
                             <td id="id3" width="5%">0</td>
                             <td id="tdright3" width="15%"> Loading..</td>
                             <td id="tdwrong3" width="15%"> Loading..</td>
@@ -94,7 +96,7 @@
                                 <input id="v3" align="center" type="checkbox" onclick="store(this,2)">
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="font-size: 16px" align="center">
                             <td id="id4" width="5%">0</td>
                             <td id="tdright4" width="15%"> Loading..</td>
                             <td id="tdwrong4" width="15%"> Loading..</td>
@@ -103,7 +105,7 @@
                                 <input id="v4" align="center" type="checkbox" onclick="store(this,3)">
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="font-size: 16px" align="center">
                             <td id="id5" width="5%">0</td>
                             <td id="tdright5" width="15%"> Loading..</td>
                             <td id="tdwrong5" width="15%"> Loading..</td>
@@ -124,13 +126,13 @@
                         </button>
 
                     </div>
-                    
+
                     <br/>
                     <br/>
-                    <div class="row" align="left">
+                    <div class="row" align="left" style="margin-left: 2px">
                         <input id="newguide" type="text"
-                               placeholder="请输入你要添加的引导语内容" size="75"/>
-                        <button type="button" onclick="uploadGuide()" style="position:absolute;left:70%"
+                               placeholder="请输入你要添加的引导语内容" size="70"/>
+                        <button type="button" onclick="uploadGuide()" style="position:absolute;left:68%"
                         >
                             输入完毕,上传
                         </button>

@@ -101,7 +101,9 @@ def gen_detail(request):
     print("show gen detail len: "+str(len(detail)))
     current_page = request.GET.get('p')
     # Paginator对象，里面封装了上面那些值，把USER_LIST对象传过来了，显示10页
-    paginator = Paginator(detail, 3)
+    paginator = Paginator(detail, 8)
+
+
 
     try:
         # page对象
@@ -141,7 +143,7 @@ def allGen(request):
 
     current_page = request.GET.get('p')
     # Paginator对象，里面封装了上面那些值，把USER_LIST对象传过来了，显示10页
-    paginator = Paginator(gens, 3)
+    paginator = Paginator(gens, 8)
 
     try:
         # page对象

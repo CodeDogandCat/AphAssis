@@ -27,13 +27,13 @@
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row" style="position:absolute;left:20%;top:22%;width:75%;height:75%">
-                    <table align="center" width="80%" border=2 bordercolor="#00ff99">
+                    <table align="center" width="80%" border=1 bordercolor="#5e75a8">
                         <tbody>
                         <tr height="45px">
-                            <td colspan="6" align="center" style="font-size: 25px">全部题目</td>
+                            <td colspan="6" align="center" style="font-size: 27px">全部题目</td>
                         </tr>
-                        <tr align="center" style="font-size: 22px">
-                            <td width="10%">id</td>
+                        <tr align="center" style="font-size: 23px">
+                            <td width="10%">编号</td>
                             <td width="42%">问题</td>
                             <td width="12%">选项1</td>
                             <td width="12%">选项2</td>
@@ -41,7 +41,7 @@
                             <td width="12%">选项4</td>
                         </tr>
                         {% for row in posts.object_list %}
-                            <tr align="center" style="font-size: 20px">
+                            <tr align="center" style="font-size: 18px">
                                 <td width="10%">{{ row.id }}</td>
                                 <td width="42%">{{ row.question }}</td>
                                 <td width="12%"><a class="preview btn btn-info"

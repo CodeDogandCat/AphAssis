@@ -29,7 +29,7 @@
                     <legend style="font-size: 25px">请给患者分配套题</legend>
 
                     <form action="">
-                        <p style="font-size: 20px">请在下拉框中选择患者 &nbsp &nbsp &nbsp
+                        <p style="font-size: 20px">请选择患者 &nbsp &nbsp &nbsp
                         <select id="patientid">
                             {% for x in patients %}
                                 <option value="{{ x.id }}">{{ x.res_username }}</option>
@@ -37,42 +37,41 @@
                         </select>
                         </p>
 
-                        <p style="font-size: 18px">请在列表中勾选套题</p>
-                        <table border="1" width="80%" style="font-size: 20px">
-                            <tr align="center">
-                                <td width="10%">id</td>
-                                <td width="80%">套题的描述</td>
+                        <table border="1" width="80%" border=1 bordercolor="#5e75a8">
+                            <tr align="center" style="font-size: 23px">
+                                <td width="10%">编号</td>
+                                <td width="80%">套题描述</td>
                                 <td width="10%">操作</td>
                             </tr>
-                            <tr align="center">
+                            <tr align="center" style="font-size: 18px">
                                 <td id="id1" width="10%">0</td>
                                 <td id="td1" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v1" align="center" type="checkbox" onclick="store(this,0)">
                                 </td>
                             </tr>
-                            <tr align="center">
+                            <tr align="center" style="font-size: 18px">
                                 <td id="id2" width="10%">0</td>
                                 <td id="td2" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v2" align="center" type="checkbox" onclick="store(this,1)">
                                 </td>
                             </tr>
-                            <tr align="center">
+                            <tr align="center" style="font-size: 18px">
                                 <td id="id3" width="10%">0</td>
                                 <td id="td3" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v3" align="center" type="checkbox" onclick="store(this,2)">
                                 </td>
                             </tr>
-                            <tr align="center">
+                            <tr align="center" style="font-size: 18px">
                                 <td id="id4" width="10%">0</td>
                                 <td id="td4" width="80%"> Loading..</td>
                                 <td width="10%">
                                     <input id="v4" align="center" type="checkbox" onclick="store(this,3)">
                                 </td>
                             </tr>
-                            <tr align="center">
+                            <tr align="center" style="font-size: 18px">
                                 <td id="id5" width="10%">0</td>
                                 <td id="td5" width="80%"> Loading..</td>
                                 <td width="10%">

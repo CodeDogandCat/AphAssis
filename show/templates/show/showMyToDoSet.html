@@ -74,6 +74,29 @@
                                 <td id="tdarrtime5" width="20%">Loading..</td>
                                 <td id="tdreview5" width="20%"><a id="op5" href="#">开始训练</a></td>
                             </tr>
+
+                            <tr align="center" id="tr6" style="font-size:18px">
+                                <td id="id6" width="10%">0</td>
+                                <td id="tdset6" width="10%">Loading..</td>
+                                <td id="tdsetdes6" width="40%"> Loading..</td>
+                                <td id="tdarrtime6" width="20%">Loading..</td>
+                                <td id="tdreview6" width="20%"><a id="op6" href="#">开始训练</a></td>
+                            </tr>
+                            <tr align="center" id="tr7" style="font-size:18px">
+                                <td id="id7" width="10%">0</td>
+                                <td id="tdset7" width="10%">Loading..</td>
+                                <td id="tdsetdes7" width="40%"> Loading..</td>
+                                <td id="tdarrtime7" width="20%">Loading..</td>
+                                <td id="tdreview7" width="20%"><a id="op7" href="#">开始训练</a></td>
+                            </tr>
+                            <tr align="center" id="tr8" style="font-size:18px">
+                                <td id="id8" width="10%">0</td>
+                                <td id="tdset8" width="10%">Loading..</td>
+                                <td id="tdsetdes8" width="40%"> Loading..</td>
+                                <td id="tdarrtime8" width="20%">Loading..</td>
+                                <td id="tdreview8" width="20%"><a id="op8" href="#">开始训练</a></td>
+                            </tr>
+
                         </table>
                         <br/>
                         <div class="row" align="center">
@@ -115,7 +138,7 @@
 
 
 <script>
-
+    var LineNumber = 8;
     var pageNum = 1;
     var all_sets;
     var all_length = 0;
@@ -134,7 +157,7 @@
     }
 
     function addPage() {
-        if (pageNum > all_length / 5) {
+        if (pageNum > all_length / LineNumber) {
             alert("这是最后一页");
         }
         else {
@@ -153,12 +176,12 @@
 
     function sets_display() {
 
-        var ques_2_disp = 5;
-        var reduce = all_length % 5;
-        let final = (pageNum === parseInt(((all_length + 4) / 5)));
+        var ques_2_disp = LineNumber;
+        var reduce = all_length % LineNumber;
+        let final = (pageNum === parseInt(((all_length + LineNumber - 1) / LineNumber)));
         if (final) {
             if (reduce == 0) {
-                ques_2_disp = 5;
+                ques_2_disp = LineNumber;
             }
             else {
                 ques_2_disp = reduce;
@@ -167,8 +190,8 @@
         }
 
 
-        var startNum = (pageNum - 1) * 5;
-        for (let i = 0; i < 5; i++) {
+        var startNum = (pageNum - 1) * LineNumber;
+        for (let i = 0; i < LineNumber; i++) {
             var id = document.getElementById('id' + (i + 1));
             var tdset = document.getElementById('tdset' + (i + 1));
             var tdsetdes = document.getElementById('tdsetdes' + (i + 1));
@@ -176,7 +199,7 @@
             var op = document.getElementById('op' + (i + 1));
             var tTR = document.getElementById('tr'+(i+1));
 
-            if ((final && i >= reduce && ques_2_disp != 5) || all_length == 0) {
+            if ((final && i >= reduce && ques_2_disp != LineNumber) || all_length == 0) {
                 id.innerText = "";
                 tdset.innerText = "";
                 tdsetdes.innerText = "";

@@ -191,7 +191,7 @@
     function ques_display() {
         var ques_2_disp = LineNumber;
         var reduce = all_length % LineNumber;
-        let final = (pageNum === parseInt(((all_length + LineNumber) / LineNumber)));
+        let final = (pageNum === parseInt(((all_length + LineNumber - 1) / LineNumber)));
         if (final) {
             if (reduce == 0) {
                 ques_2_disp = LineNumber;

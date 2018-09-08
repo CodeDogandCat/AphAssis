@@ -114,6 +114,33 @@
                                 <input id="v5" align="center" type="checkbox" onclick="store(this,4)">
                             </td>
                         </tr>
+                        <tr style="font-size: 16px" align="center">
+                            <td id="id6" width="5%">0</td>
+                            <td id="tdright6" width="15%"> Loading..</td>
+                            <td id="tdwrong6" width="15%"> Loading..</td>
+                            <td id="tdguide6" width="60%"> Loading..</td>
+                            <td width="5%">
+                                <input id="v6" align="center" type="checkbox" onclick="store(this,5)">
+                            </td>
+                        </tr>
+                        <tr style="font-size: 16px" align="center">
+                            <td id="id7" width="5%">0</td>
+                            <td id="tdright7" width="15%"> Loading..</td>
+                            <td id="tdwrong7" width="15%"> Loading..</td>
+                            <td id="tdguide7" width="60%"> Loading..</td>
+                            <td width="5%">
+                                <input id="v7" align="center" type="checkbox" onclick="store(this,6)">
+                            </td>
+                        </tr>
+                        <tr style="font-size: 16px" align="center">
+                            <td id="id8" width="5%">0</td>
+                            <td id="tdright8" width="15%"> Loading..</td>
+                            <td id="tdwrong8" width="15%"> Loading..</td>
+                            <td id="tdguide8" width="60%"> Loading..</td>
+                            <td width="5%">
+                                <input id="v8" align="center" type="checkbox" onclick="store(this,7)">
+                            </td>
+                        </tr>
 
                     </table>
                     <br/>
@@ -164,7 +191,7 @@
 <script src="../static/js/galleryCustom.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script>
-
+    var LineNumber = 8;
     var pageNum = 1;
     var all_sets;
     var all_length = 0;
@@ -183,7 +210,7 @@
     }
 
     function addPage() {
-        if (pageNum > all_length / 5) {
+        if (pageNum > all_length / LineNumber) {
             alert("这是最后一页");
         }
         else {
@@ -195,10 +222,10 @@
 
     function store(vi, id) {
         if (vi.checked) {
-            setsCheck[(pageNum - 1) * 5 + id] = true;
+            setsCheck[(pageNum - 1) * LineNumber + id] = true;
         }
         else {
-            setsCheck[(pageNum - 1) * 5 + id] = false;
+            setsCheck[(pageNum - 1) * LineNumber + id] = false;
         }
     }
 
@@ -214,27 +241,27 @@
     //input 有一个type域，如果是 "hidden",就是不显示
 
     function sets_display(typeid) {
-        var ques_2_disp = 5;
-        var reduce = all_length % 5;
-        let final = (pageNum === parseInt(((all_length + 4) / 5)));
+        var ques_2_disp = LineNumber;
+        var reduce = all_length % LineNumber;
+        let final = (pageNum === parseInt(((all_length + LineNumber - 1) / LineNumber)));
         if (final) {
             if (reduce == 0) {
-                ques_2_disp = 5;
+                ques_2_disp = LineNumber;
             }
             else {
                 ques_2_disp = reduce;
             }
 
         }
-        var startNum = (pageNum - 1) * 5;
-        for (let i = 0; i < 5; i++) {
+        var startNum = (pageNum - 1) * LineNumber;
+        for (let i = 0; i < LineNumber; i++) {
 
             var id = document.getElementById('id' + (i + 1));
             var tdright = document.getElementById('tdright' + (i + 1));
             var tdwrong = document.getElementById('tdwrong' + (i + 1));
             var tdguide = document.getElementById('tdguide' + (i + 1));
 
-            if ((final && i >= reduce && ques_2_disp != 5) || all_length == 0) {
+            if ((final && i >= reduce && ques_2_disp != LineNumber) || all_length == 0) {
                 id.innerText = ""
                 tdright.innerText = "";
                 tdwrong.innerText = "";

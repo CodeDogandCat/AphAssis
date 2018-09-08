@@ -29,7 +29,7 @@ def get_chart_data(request):
         for item in data_to_chart:  
             sets_name = sets_name +  item['name'] + ','
             wrong_count = wrong_count + str(item['count']) + ','
-            score = score + str(item['count']/item['number']) + ','
+            score = score + str(1 - item['count']/item['number']) + ','
             time = time + str(item['time']) + ','
 
     return JsonResponse({
@@ -70,13 +70,15 @@ def gen_detail(request):
             #解析错题记录
             count = 0
             w_list = str(item.wrong_ques).split(',')
+
             w_str = ''
             for wrong_pair in w_list:
                 ls = str(wrong_pair).split('@')
                 wrong_ques_id = ls[0]
-                #wrong_log = ls[1]  
-                w_str += str(wrong_ques_id) + ','
-                count = count + 1
+                #wrong_log = ls[1]
+                if(wrong_ques_id != ''):
+                    w_str += str(wrong_ques_id) + ','
+                    count = count + 1
 
             if w_str.endswith(','):
                 w_str = w_str[0:len(w_str) - 1]
@@ -191,9 +193,6 @@ def word_fam(request):
 
 def get_fam_data(request):
     all_user = list(register.objects.all())
-
-    gen_list = set()
-    all_fam_data = list(familiarity.objects.all())  #所有分数
     
     all_scores = {}  ##每个用户
 
@@ -206,23 +205,4 @@ def get_fam_data(request):
         if len(s_word) > 0:
             all_scores[user.res_username] = s_word
 
-    '''
-    all_fam = ''
-    all_user = ''
-    all_word = ''
-    for user,words in all_scores.items():
-        all_user = all_user
-
-    for user in gen_list:
-        all_user = all_user + user.res_username + ','
-        for word in word_list:
-            p_score = familiarity.objects.filter(res_id=user.id,word=word)
-            all_fam = all_fam + str(p_score[0].score) + ','
-	
-    return JsonResponse({
-            'users' : all_user,
-            'words' : all_word,
-            'scores' : all_fam
-        })
-	'''
     return JsonResponse(all_scores)

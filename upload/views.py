@@ -5,6 +5,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from upload.models import Ques
 from upload.models import guide
+from show.models import vocab
+from login.models import register,familiarity
+
 from aip import AipSpeech
 from django.http import HttpResponse, JsonResponse
 import re
@@ -27,22 +30,45 @@ def upload(request):
             with open("media/voice/" + ques_str + '.mp3', 'wb') as f:
                 f.write(result)
 
+        words = []
+        words.append(request.POST.get('desA', None))
+        words.append(request.POST.get('desB', None))
+        words.append(request.POST.get('desC', None))
+        words.append(request.POST.get('desD', None))
+        
         new_Ques = Ques(
             question=ques_str,
             imageA=request.FILES.get('imageA'),
-            DesA=request.POST.get('desA', None),
+            DesA=words[0],
             imageB=request.FILES.get('imageB'),
-            DesB=request.POST.get('desB', None),
+            DesB=words[1],
             imageC=request.FILES.get('imageC'),
-            DesC=request.POST.get('desC', None),
+            DesC=words[2],
             imageD=request.FILES.get('imageD'),
-            DesD=request.POST.get('desD', None),
+            DesD=words[3],
             voice="media/voice/" + ques_str + '.mp3'
         )
         new_Ques.save()
+        ##将新出现的词汇添加到词汇表中
+        addWord(words)
+
+
     username = request.session['username']
     classid = request.session['classid']
     return render(request, 'upload/uploadEx.html', {'username': username, 'classid': classid})
+
+def addWord(words):
+	print("add word:")
+	print(words)
+	all_user = list(register.objects.all())
+
+	for item in words:
+		if(len(vocab.objects.filter(word=item)) == 0):
+			new_word = vocab(word=item)
+			new_word.save()
+			for user in all_user:
+				new_fam = familiarity(res_id=user.id,word=item,score=50)
+				new_fam.save()
 
 
 #引导语的增删改查

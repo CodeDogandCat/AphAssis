@@ -25,6 +25,7 @@ def doEx(request):
 
 @csrf_exempt
 def error_answer(request):
+    print("do Ex wrong")
     error_no = request.POST.get('no', None)
 
     # 协同过滤需要的参数
@@ -44,11 +45,13 @@ def error_answer(request):
         wrong_pair[str(error_no)] = ''  # 用来保存错题-错误选项-有效引导语  对
 
     right = request.POST.get('right', None)
-    print("before check_record")
+    ##print("before check_record")
     check_record(user_id, ques_id, right, 0)  ##都需要用绝对id
     wrong = request.POST.get('wrong', None)
     Guider = list(guide.objects.filter(right_answer=right, wrong_answer=wrong))
-
+    print("right:" + right)
+    print("wrong:" + wrong)
+    
     if len(Guider) > 0:
         ##---------------现在是BKT算法的添加-------------
         answer_familiarity = list(familiarity.objects.filter(res_id=user_id, word=right))

@@ -113,7 +113,7 @@ def saveSoundSetting(request):
     username = request.session['username']
     classid = request.session['classid']
     if request.method == 'POST':
-        sound_name = request.POST.get('sound_name', None)  # 从前端的输入框里获取输入
+        sound_name = request.POST.get('sound_name', "默认")  # 从前端的输入框里获取输入
         user = register.objects.get(res_username=username)
         user.selected_speech=sound_name
         user.save()

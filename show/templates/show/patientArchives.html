@@ -29,6 +29,14 @@
             float: left;
             margin-left: 120px;
         }
+
+        label {
+            font-size: 14px;
+        }
+
+        input {
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -41,7 +49,7 @@
                 <fieldset style="position:absolute;left:27%;top:17%;width:75%;height:75%">
                     <legend style="font-size: 25px">档案设置</legend>
 
-                    <form role="form" style="width: fit-content;height: 100%">
+                    <form role="form" style="width: fit-content;height: 90%">
                         <div id="col-one">
                             <div class="form-group input-group" style="width:300px">
                                 <label>患者姓名</label>
@@ -53,7 +61,7 @@
                                 <input type="password" class="form-control" placeholder="密码" id="res_password"
                                        value="{{ res_password }}"/>
                             </div>
-                            <div class="form-group input-group" style="width:300px">
+                            <div class="form-group input-group" style=" width:300px">
                                 <label>确认密码</label>
                                 <input type="password" class="form-control" placeholder="确认密码" id="res_rpassword"
                                        value="{{ res_password }}"/>
@@ -88,6 +96,17 @@
                                 <label>并发症</label>
                                 <input type="text" class="form-control" placeholder="并发症"
                                        id="comorbidity_disease" value="{{ comorbidity_disease }}"/>
+                            </div>
+                            <div class="form-group" style="width:300px">
+                                <label>语音偏好</label>
+                                <select class="form-control" id="sound" value="{{ sound }}">
+                                    <option value="默认">默认</option>
+                                    <option value="习近平">习近平</option>
+                                    <option value="单田芳">单田芳</option>
+                                    <option value="赵本山">赵本山</option>
+                                    <option value="郭德纲">郭德纲</option>
+                                    <option value="林志玲">林志玲</option>
+                                </select>
                             </div>
                         </div>
                         <div id="col-two">
@@ -154,14 +173,13 @@
                                     <option value="6">博士</option>
                                 </select>
                             </div>
+                            <div style="float: right;margin-top:10px;">
 
+                                <a class="btn btn-primary" style="alignment: center" onclick="save()">保存</a>
+
+                            </div>
                         </div>
 
-                        <div>
-
-                            <a class="btn btn-primary" style="alignment: center" onclick="save()">保存</a>
-
-                        </div>
 
                     </form>
                 </fieldset>
@@ -241,6 +259,20 @@
 
         document.getElementById("profession")[m.get(pro)].selected = true;
     }
+    var sou = '{{ sound }}';
+    if (sou !=
+        ""
+    ) {
+        var m = new Map();
+        m.set("默认", 0);
+        m.set("习近平", 1);
+        m.set("单田芳", 2);
+        m.set("赵本山", 3);
+        m.set("郭德纲", 4);
+        m.set("林志玲", 5);
+
+        document.getElementById("sound")[m.get(sou)].selected = true;
+    }
 
     var old_password = '{{ res_password }}';
 
@@ -279,6 +311,7 @@
         var language_background = $('#language_background').val();
         var type_of_aphasia = $('#type_of_aphasia option:selected').val();
         var self_correcting_ability = $('#self_correcting_ability').val();
+        var sound = $('#sound').val();
         if (res_username == "") {
             alert("用户名不能为空");
             return 0;
@@ -357,7 +390,8 @@
                 'language_background': language_background,
                 'type_of_aphasia': type_of_aphasia,
                 'self_correcting_ability': self_correcting_ability,
-                'primary_disease': primary_disease
+                'primary_disease': primary_disease,
+                'sound': sound
             },
             success: function success(data) {
                 if (data.status == "failed")

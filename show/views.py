@@ -106,6 +106,7 @@ def get_patient_account(request):
     intelligence = "" if patient.intelligence is None else patient.intelligence
     language_background = "" if patient.language_background is None else patient.language_background
     self_correcting_ability = "" if patient.self_correcting_ability is None else patient.self_correcting_ability
+    sound = "默认" if patient.selected_speech is None else patient.selected_speech
     # toList.append(deepcopy(ans))
     return render(request, 'show/patientArchives.html', {'res_username': res_username,
                                                          'res_password': res_password,
@@ -122,6 +123,7 @@ def get_patient_account(request):
                                                          'intelligence': intelligence,
                                                          'language_background': language_background,
                                                          'self_correcting_ability': self_correcting_ability,
+                                                         'sound': sound,
                                                          'username': username, 'classid': classid})
 
 
@@ -142,6 +144,7 @@ def save_patient_account(request):
         intelligence = request.POST.get('intelligence', None)
         language_background = request.POST.get('language_background', None)
         self_correcting_ability = request.POST.get('self_correcting_ability', None)
+        sound = request.POST.get('sound', '默认')
         patient = register.objects.get(res_username=res_username)
         if patient.res_password != res_password:
             patient.res_password = res_password
@@ -160,6 +163,7 @@ def save_patient_account(request):
         patient.intelligence = intelligence
         patient.language_background = language_background
         patient.self_correcting_ability = self_correcting_ability
+        patient.selected_speech = sound
 
         patient.save()
         resp = {'status': 'success', 'reason': '保存成功'}

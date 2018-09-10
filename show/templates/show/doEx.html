@@ -18,6 +18,7 @@
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <style>
+
         #leftpart {
             float: left;
             width: 300px;
@@ -27,6 +28,54 @@
             float: left;
             margin-left: 60px;
         }
+
+        .btn-audio {
+        {#margin: 90px auto;#} margin-left: 60px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            width: 80px;
+            height: 80px;
+            background: url(../static/image/start.png) no-repeat center bottom;
+            background-size: contain;
+        }
+
+        button {
+            padding: 0;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        .play {
+            height: 74px;
+            border-style: solid;
+            border-width: 37px 0 37px 60px;
+            border-color: transparent transparent transparent black;
+        }
+
+        .stop {
+            width: 74px;
+            height: 74px;
+            border-style: double;
+            border-width: 0px 0px 0px 60px;
+            border-color: #202020;
+        }
+
+        div img {
+            cursor: pointer;
+            transition: all 0.6s;
+        }
+
+        div img:hover {
+            transform: scale(1.1);
+            border: 1px solid #cc0000;
+            background: #f0f0f0;
+            opacity: 0.8
+        }
+
+        {##div1 #div2 #div3 #div4 :hover {#}
+        {#    border: 1px solid #cc0000;#}
+        {
+        #}#}
     </style>
 
 </head>
@@ -41,13 +90,19 @@
                 <div class="col-md-10">
                     <div id="leftpart">
                         <h3>请按照语音提示选择图片</h3>
-                        <audio id="play" src="" controls='controls'></audio>
+                        <div class="btn-audio">
+                            <audio id="mp3Btn">
+                                {#                                <source src="" type="audio/mpeg"/>#}
+                            </audio>
+                        </div>
+
+                        {#                        <audio id="play" src="" controls='controls'></audio>#}
                         <audio id="play1" src=""></audio>
                     </div>
                     <div id="rightpart">
-                        <video id="video" width="300" height="150" autoplay></video>
+                        <video id="video" width="100" height="100" autoplay></video>
                     </div>
-                    <canvas style="display: none" id="canvas" width="480" height="480"></canvas>
+                    <canvas style="display: none" id="canvas" width="100" height="100"></canvas>
                     {#表情识别#}
                 </div>
             </div>
@@ -55,30 +110,30 @@
             <div id="port-folio">
                 <div class="row " style="text-align:center;">
                     <div class="row " style="padding-left: 60px">
-                        <div class="col-md-4 ">
-                            <div class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 280px;height: 280px">
+                        <div class="col-md-3 ">
+                            <div id='div1' class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 200px;height: 200px">
                                 <img id="img1" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
-                        <div class="col-md-4 " style="padding-left: 20px">
-                            <div class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 280px;height: 280px">
+                        <div class="col-md-3 " style="padding-left: 20px">
+                            <div id='div2' class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 200px;height: 200px">
                                 <img id="img2" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
                     </div>
 
                     <div class="row " style="padding-top: 20px;padding-left: 60px">
-                        <div class="col-md-4 ">
-                            <div class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 280px;height: 280px">
+                        <div class="col-md-3 ">
+                            <div id='div3' class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 200px;height: 200px">
                                 <img id="img3" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
-                        <div class="col-md-4 ">
-                            <div class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 280px;height: 280px">
+                        <div class="col-md-3 ">
+                            <div id='div4' class="portfolio-item nature mix_all" data-cat="nature"
+                                 style="width: 200px;height: 200px">
                                 <img id="img4" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
@@ -114,8 +169,8 @@
     var used_time = 0;  //单位是秒
     var pathA, pathB, pathC, pathD, pathVoice;
     var desA, desB, desC, desD, Answer, guidePath;
-    var audio = document.getElementById('play1');
-    var audio1 = document.getElementById('play');
+    var audio = document.getElementById('mp3Btn');
+    var audio1 = document.getElementById('play1');
     var oImg1 = document.getElementById('img1');
     var oImg2 = document.getElementById('img2');
     var oImg3 = document.getElementById('img3');
@@ -125,6 +180,57 @@
     var current_ques_wrong_option = -1;//刚刚犯下的错误选项 相对id
     var current_valid_guide_id = -1;//当前问题出错后，使得患者答对题目的引导语 id
     var current_valid_guide_path = "";//当前问题出错后，使得患者答对题目的引导语路徑
+    var successGuides = new Array();
+    successGuides[0] = '/media/guide/恭喜你答对了.mp3';
+    successGuides[1] = '/media/guide/答对了.mp3';
+    successGuides[2] = '/media/guide/答对了，真棒.mp3';
+    successGuides[3] = '/media/guide/做得好.mp3';
+    successGuides[4] = '/media/guide/做对了.mp3';
+    successGuides[5] = '/media/guide/答对了，太棒了.mp3';
+    successGuides[6] = '/media/guide/答对了，再接再厉.mp3';
+    successGuides[7] = '/media/guide/答对了，继续加油.mp3';
+    successGuides[8] = '/media/guide/答对了，一起加油.mp3';
+    successGuides[9] = '/media/guide/答对了，一起努力.mp3';
+    successGuides[10] = '/media/guide/恭喜，对啦.mp3';
+    var failGuides = new Array();
+    failGuides[0] = '/media/guide/答错啦.mp3';
+    failGuides[1] = '/media/guide/错了.mp3';
+    failGuides[2] = '/media/guide/很遗憾，答错了.mp3';
+    failGuides[3] = '/media/guide/选错了.mp3';
+
+
+    //播放器控制
+    var myaudio = document.getElementById('mp3Btn');
+    myaudio.volume = .3;
+    //播放完毕
+    $('#mp3Btn').on('ended', function () {
+        console.log(myaudio.src);
+
+        $('.btn-audio').css({
+            'background': 'url(../static/image/start.png) no-repeat center bottom',
+            'background-size': 'contain'
+        });
+        console.log("音频已播放完成");
+    });
+
+    $('.btn-audio').click(function () {
+        event.stopPropagation();//防止冒泡
+        if (audio.paused) { //如果当前是暂停状态
+            $('.btn-audio').css({
+                'background': 'url(../static/image/pause.png) no-repeat center bottom',
+                'background-size': 'contain'
+            });
+            myaudio.play(); //播放
+            return;
+        } else {//当前是播放状态
+            $('.btn-audio').css({
+                'background': 'url(../static/image/start.png) no-repeat center bottom',
+                'background-size': 'contain'
+            });
+            myaudio.pause(); //暂停
+        }
+    });
+
 
     function reset() {
         current_ques_id = -1; // 当前问题的id
@@ -185,7 +291,7 @@
                     pathVoice = data.voice;
 
                     pathVoice = "/" + pathVoice;
-                    audio1.src = pathVoice;
+                    audio.src = pathVoice;
                     console.log(pathVoice);
                 }
 
@@ -194,9 +300,9 @@
                 {#alert("Some error!");#}
             }
         });
-    }
+        {#var audio = document.getElementById('mp3Btn');#}
 
-    get_next(0);
+    }
 
 
     function error_answer(des) {
@@ -225,9 +331,9 @@
                     current_valid_guide_id = data.id;
                     current_valid_guide_path = data.guide;
                     guidePath = "/" + data.guide;
-                    audio.src = guidePath;
+                    audio1.src = guidePath;
                     console.log(guidePath);
-                    audio.play();
+                    audio1.play();
                 }
             },
             error: function (data) {
@@ -236,46 +342,67 @@
         });
     }
 
+    function successGuidePre() {
+        var index = Math.round(Math.random() * 10);
+        audio1.src = successGuides[index];
+        audio1.play();
+        console.log(audio1.src);
+    }
+
+    function failGuidePre() {
+        var index = Math.round(Math.random() * 3);
+        audio1.src = failGuides[index];
+        audio1.play();
+        console.log(audio1.src);
+    }
 
     oImg1.onclick = function () {
         var checkA = (desA == Answer);
         if (checkA) {
-            get_next(1);
+            successGuidePre();
+            setTimeout("get_next(1)", 200);
 
         } else {
             current_ques_wrong_option = 1;
-            error_answer(desA);
+            failGuidePre();
+            setTimeout("error_answer(desA)", 200);
         }
     };
 
     oImg2.onclick = function () {
         var checkB = (desB == Answer);
         if (checkB) {
-            get_next(1);
+            successGuidePre();
+            setTimeout("get_next(1)", 200);
         }
         else {
             current_ques_wrong_option = 2;
-            error_answer(desB);
+            failGuidePre();
+            setTimeout("error_answer(desB)", 200);
         }
     };
 
     oImg3.onclick = function () {
         var checkC = (desC == Answer);
         if (checkC) {
-            get_next(1);
+            successGuidePre();
+            setTimeout("get_next(1)", 200);
         } else {
             current_ques_wrong_option = 3;
-            error_answer(desC);
+            failGuidePre();
+            setTimeout("error_answer(desC)", 200);
         }
     };
 
     oImg4.onclick = function () {
         var checkD = (desD == Answer);
         if (checkD) {
-            get_next(1);
+            successGuidePre();
+            setTimeout("get_next(1)", 200);
         } else {
             current_ques_wrong_option = 4;
-            error_answer(desD);
+            failGuidePre();
+            setTimeout("error_answer(desD)", 200);
         }
     };
 
@@ -291,7 +418,7 @@
 
     if (navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
         //调用用户媒体设备, 访问摄像头
-        getUserMedia({video: {width: 480, height: 320}}, success, error);
+        getUserMedia({video: {width: 100, height: 100}}, success, error);
     } else {
         alert('不支持访问用户媒体');
     }
@@ -339,7 +466,7 @@
         }
 
         if (ss % 3 == 0) {
-            ctx.drawImage(aVideo, 0, 0, 480, 320);
+            ctx.drawImage(aVideo, 0, 0, 100, 100);
             {#截取前面#}
             snap_base64 = aCanvas.toDataURL("image/png").substring(22);
             {#console.log(snap_base64)#}
@@ -406,17 +533,25 @@
             });
         }
 
-    {#表情识别#}
-</script>
-<script>
-    function confirmAct() {
-        var msg = "您真的确定要退出吗？\n\n请确认！";
-        if (confirm(msg) == true) {
-            return true;
-        } else {
-            return false;
+
+        {#表情识别#}
+
+        function confirmAct() {
+            var msg = "您真的确定要退出吗？\n\n请确认！";
+            if (confirm(msg) == true) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    }
+
+        get_next(0);
+</script>
+<script type="text/javascript">
+    $(window).load(function () {
+        console.log("进入页面第一次播放");
+        setTimeout("audio.click()", 1000);
+    });
 </script>
 </body>
 </html>

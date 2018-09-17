@@ -112,13 +112,13 @@
                     <div class="row " style="padding-left: 60px">
                         <div class="col-md-3 ">
                             <div id='div1' class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 200px;height: 200px">
+                                 style="width: 150px;height: 150px">
                                 <img id="img1" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
                         <div class="col-md-3 " style="padding-left: 20px">
                             <div id='div2' class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 200px;height: 200px">
+                                 style="width: 150px;height: 150px">
                                 <img id="img2" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
@@ -127,13 +127,13 @@
                     <div class="row " style="padding-top: 20px;padding-left: 60px">
                         <div class="col-md-3 ">
                             <div id='div3' class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 200px;height: 200px">
+                                 style="width: 150px;height: 150px">
                                 <img id="img3" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
                         <div class="col-md-3 ">
                             <div id='div4' class="portfolio-item nature mix_all" data-cat="nature"
-                                 style="width: 200px;height: 200px">
+                                 style="width: 150px;height: 150px">
                                 <img id="img4" style="width:100%; height:100%;" src="" class="img-responsive " alt=""/>
                             </div>
                         </div>
@@ -167,9 +167,10 @@
 <script type="text/javascript">
     var no = 0;
     var used_time = 0;  //单位是秒
+    var dur_time = 2000;
     var pathA, pathB, pathC, pathD, pathVoice;
     var desA, desB, desC, desD, Answer, guidePath;
-    var audio = document.getElementById('mp3Btn');
+    //var audio = document.getElementById('mp3Btn');
     var audio1 = document.getElementById('play1');
     var oImg1 = document.getElementById('img1');
     var oImg2 = document.getElementById('img2');
@@ -201,7 +202,7 @@
 
     //播放器控制
     var myaudio = document.getElementById('mp3Btn');
-    myaudio.volume = .3;
+    myaudio.volume = .7;
     //播放完毕
     $('#mp3Btn').on('ended', function () {
         console.log(myaudio.src);
@@ -214,8 +215,8 @@
     });
 
     $('.btn-audio').click(function () {
-        event.stopPropagation();//防止冒泡
-        if (audio.paused) { //如果当前是暂停状态
+        //event.stopPropagation();//防止冒泡
+        if (myaudio.paused) { //如果当前是暂停状态
             $('.btn-audio').css({
                 'background': 'url(../static/image/pause.png) no-repeat center bottom',
                 'background-size': 'contain'
@@ -236,7 +237,6 @@
         current_ques_id = -1; // 当前问题的id
         current_ques_status = 0;// 当前问题的状态 0 未出错过  1 出错过
         current_valid_guide_id = -1;//当前问题出错后，使得患者答对题目的引导语 id
-
     }
 
     function get_next(typeid) {
@@ -291,10 +291,12 @@
                     pathVoice = data.voice;
 
                     pathVoice = "/" + pathVoice;
-                    audio.src = pathVoice;
+                    myaudio.src = pathVoice;
                     console.log(pathVoice);
+                    console.log("进入页面第一次播放");
+        			myaudio.pause();
+        			setTimeout("myaudio.click()", 700);
                 }
-
             },
             error: function (data) {
                 {#alert("Some error!");#}
@@ -360,12 +362,12 @@
         var checkA = (desA == Answer);
         if (checkA) {
             successGuidePre();
-            setTimeout("get_next(1)", 200);
+            setTimeout("get_next(1)", dur_time);
 
         } else {
             current_ques_wrong_option = 1;
             failGuidePre();
-            setTimeout("error_answer(desA)", 200);
+            setTimeout("error_answer(desA)", dur_time);
         }
     };
 
@@ -373,12 +375,12 @@
         var checkB = (desB == Answer);
         if (checkB) {
             successGuidePre();
-            setTimeout("get_next(1)", 200);
+            setTimeout("get_next(1)", dur_time);
         }
         else {
             current_ques_wrong_option = 2;
             failGuidePre();
-            setTimeout("error_answer(desB)", 200);
+            setTimeout("error_answer(desB)", dur_time);
         }
     };
 
@@ -386,11 +388,11 @@
         var checkC = (desC == Answer);
         if (checkC) {
             successGuidePre();
-            setTimeout("get_next(1)", 200);
+            setTimeout("get_next(1)", dur_time);
         } else {
             current_ques_wrong_option = 3;
             failGuidePre();
-            setTimeout("error_answer(desC)", 200);
+            setTimeout("error_answer(desC)", dur_time);
         }
     };
 
@@ -398,11 +400,11 @@
         var checkD = (desD == Answer);
         if (checkD) {
             successGuidePre();
-            setTimeout("get_next(1)", 200);
+            setTimeout("get_next(1)", dur_time);
         } else {
             current_ques_wrong_option = 4;
             failGuidePre();
-            setTimeout("error_answer(desD)", 200);
+            setTimeout("error_answer(desD)", dur_time);
         }
     };
 
@@ -546,12 +548,6 @@
         }
 
         get_next(0);
-</script>
-<script type="text/javascript">
-    $(window).load(function () {
-        console.log("进入页面第一次播放");
-        setTimeout("audio.click()", 1000);
-    });
 </script>
 </body>
 </html>
